@@ -2,14 +2,12 @@
 
 namespace OrganizaMed.Dominio.Compartilhado;
 
-public abstract class EntidadeBase<T>
+public abstract class Entidade
 {
 	public Guid Id { get; set; }
 
-	public EntidadeBase()
+	public Entidade()
 	{
 		Id = SequentialGuid.NewGuid();
 	}
-
-	public abstract void Atualizar(T registro);
 }

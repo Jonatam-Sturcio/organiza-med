@@ -2,7 +2,7 @@
 
 namespace OrganizaMed.Dominio.ModuloMedico;
 
-public class Medico : EntidadeBase<Medico>
+public class Medico : Entidade
 {
 	public Medico()
 	{
@@ -18,13 +18,6 @@ public class Medico : EntidadeBase<Medico>
 	public string Nome { get; set; }
 	public string Especialidade { get; set; }
 	public string CRM { get; set; }
-
-	public override void Atualizar(Medico registro)
-	{
-		Id = registro.Id;
-		Nome = registro.Nome;
-		CRM = registro.CRM;
-	}
 
 	public override string ToString()
 	{
