@@ -4,22 +4,35 @@ namespace OrganizaMed.Dominio.Compartilhado;
 
 public abstract class AtividadeBase : Entidade
 {
-	protected AtividadeBase()
+	public AtividadeBase()
 	{
 	}
 
-	protected AtividadeBase(DateTime data, DateTime horaInicio, DateTime horaTermino)
+	public AtividadeBase(DateTime horaInicio, DateTime horaTermino)
 	{
-		Data = data;
 		HoraInicio = horaInicio;
 		HoraTermino = horaTermino;
 		Medicos = [];
 	}
 
-	public DateTime Data { get; set; }
 	public DateTime HoraInicio { get; set; }
 	public DateTime HoraTermino { get; set; }
 	public List<Medico> Medicos { get; set; }
+	public abstract TipoAtividadeEnum TipoAtividade { get; set; }
+	protected TipoAtividadeEnum tipoAtividade;
 
 	public abstract TimeSpan ObterPeriodoDescanso();
+
+	public List<string> ValidarPeriodoDescanso()
+	{
+		var erros = new List<string>();
+
+		foreach (var medico in Medicos)
+		{
+			if (!medico.PeriodoDeDescansoEstaValido(this))
+				erros.Add($"O médico '{medico.Nome}' está em periodo de descanso mandatório.");
+		}
+
+		return erros;
+	}
 }

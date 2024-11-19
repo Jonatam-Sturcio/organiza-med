@@ -13,6 +13,7 @@ public class Medico : Entidade
 		Nome = nome;
 		Especialidade = especialidade;
 		CRM = Crm;
+		Atividades = [];
 	}
 
 	public string Nome { get; set; }
@@ -46,5 +47,15 @@ public class Medico : Entidade
 				periodoDeDescansoValido = true;
 		}
 		return periodoDeDescansoValido;
+	}
+
+	public void RegistrarAtividade(AtividadeBase atividade)
+	{
+		foreach (var atividadeRegistrada in Atividades)
+		{
+			if (atividadeRegistrada.Id == atividade.Id)
+				continue;
+		}
+		Atividades.Add(atividade);
 	}
 }
