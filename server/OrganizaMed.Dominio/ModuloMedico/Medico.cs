@@ -27,7 +27,7 @@ public class Medico : Entidade
 		return $"Nome: {Nome} | CRM: {CRM}";
 	}
 
-	public bool PeriodoDeDescansoEstaValido(AtividadeBase atividade)
+	public bool HorarioAtividadeEstaValido(AtividadeBase atividade)
 	{
 		var periodoDeDescansoValido = false;
 

@@ -17,7 +17,7 @@ public class ConsultaTest
 		var dataTermino = DateTime.Today + new TimeSpan(16, 0, 0);
 		var consulta = new Consulta(dataInicio, dataTermino, medico);
 
-		var errosValidacao = consulta.ValidarPeriodoDescanso();
+		var errosValidacao = consulta.ValidarHorario();
 		// Assert
 		Assert.AreEqual(0, errosValidacao.Count);
 	}
@@ -37,7 +37,7 @@ public class ConsultaTest
 		var dataTerminoDois = DateTime.Today + new TimeSpan(18, 30, 0);
 		var consultaDois = new Consulta(dataInicioDois, dataTerminoDois, medico);
 
-		var errosValidacao = consultaDois.ValidarPeriodoDescanso();
+		var errosValidacao = consultaDois.ValidarHorario();
 		// Assert
 		Assert.AreEqual(0, errosValidacao.Count);
 	}
@@ -57,7 +57,27 @@ public class ConsultaTest
 		var dataTerminoDois = DateTime.Today + new TimeSpan(18, 10, 0);
 		var consultaDois = new Consulta(dataInicioDois, dataTerminoDois, medico);
 
-		var errosValidacao = consultaDois.ValidarPeriodoDescanso();
+		var errosValidacao = consultaDois.ValidarHorario();
+		// Assert
+		Assert.AreEqual(1, errosValidacao.Count);
+	}
+
+	[TestMethod]
+	public void Deve_Retornar_erro_Cadastrando_Com_Conflito_Horario()
+	{
+		// Arrange
+		var medico = new Medico("Dr. João", "Cardiologia", "12345-SP");
+
+		// Act
+		var dataInicio = DateTime.Today + new TimeSpan(14, 0, 0);
+		var dataTermino = DateTime.Today + new TimeSpan(16, 0, 0);
+		var consulta = new Consulta(dataInicio, dataTermino, medico);
+
+		var dataInicioDois = DateTime.Today + new TimeSpan(15, 0, 0);
+		var dataTerminoDois = DateTime.Today + new TimeSpan(16, 0, 0);
+		var consultaDois = new Consulta(dataInicioDois, dataTerminoDois, medico);
+
+		var errosValidacao = consultaDois.ValidarHorario();
 		// Assert
 		Assert.AreEqual(1, errosValidacao.Count);
 	}

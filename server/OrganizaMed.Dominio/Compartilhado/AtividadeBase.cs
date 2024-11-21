@@ -23,14 +23,14 @@ public abstract class AtividadeBase : Entidade
 
 	public abstract TimeSpan ObterPeriodoDescanso();
 
-	public List<string> ValidarPeriodoDescanso()
+	public List<string> ValidarHorario()
 	{
 		var erros = new List<string>();
 
 		foreach (var medico in Medicos)
 		{
-			if (!medico.PeriodoDeDescansoEstaValido(this) && medico.Atividades.Count > 1)
-				erros.Add($"O médico '{medico.Nome}' está em periodo de descanso mandatório.");
+			if (!medico.HorarioAtividadeEstaValido(this) && medico.Atividades.Count > 1)
+				erros.Add($"Horário indisponivel.");
 		}
 
 		return erros;
