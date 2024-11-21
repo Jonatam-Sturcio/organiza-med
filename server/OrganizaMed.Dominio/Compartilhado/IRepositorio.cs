@@ -1,6 +1,4 @@
-﻿using OrganizaMed.Dominio.ModuloMedico;
-
-namespace OrganizaMed.Dominio.Compartilhado;
+﻿namespace OrganizaMed.Dominio.Compartilhado;
 
 public interface IRepositorio<T> where T : Entidade
 {
@@ -10,5 +8,5 @@ public interface IRepositorio<T> where T : Entidade
 
 	Task<bool> InserirAsync(T novoRegistro);
 
-	Task<List<Medico>> SelecionarTodosAsync();
+	Task<List<T>> SelecionarTodosAsync();
 }
