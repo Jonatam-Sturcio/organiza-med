@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using OrganizaMed.Dominio.Compartilhado;
 using OrganizaMed.Dominio.ModuloMedico;
 using OrganizaMed.Infra.Orm.Compartilhado;
 using OrganizaMed.Infra.Orm.ModuloMedico;
@@ -18,15 +17,10 @@ public class RepositorioMedicoOrmTests
 		var config = new ConfigurationBuilder().AddUserSecrets<RepositorioMedicoOrmTests>().Build();
 
 		var options = new DbContextOptionsBuilder<OrganizaMedDbContext>()
-			.UseSqlServer(config["SQLSERVER_CONNECTION_STRING"], options => options.EnableRetryOnFailure())
+			.UseSqlServer(config["SQLSERVER_CONNECTION_STRING"])
 			.Options;
 
 		db = new OrganizaMedDbContext(options);
-
-		db.Set<Medico>().RemoveRange(db.Set<Medico>());
-		db.Set<AtividadeBase>().RemoveRange(db.Set<AtividadeBase>());
-
-		db.SaveChanges();
 	}
 
 	[TestInitialize]
