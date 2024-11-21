@@ -10,6 +10,7 @@ public class Cirurgia : AtividadeBase
 		foreach (var medico in medicos)
 		{
 			Medicos.Add(medico);
+			medico.RegistrarAtividade(this);
 		}
 	}
 

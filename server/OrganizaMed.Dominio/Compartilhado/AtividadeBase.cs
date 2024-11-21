@@ -29,7 +29,7 @@ public abstract class AtividadeBase : Entidade
 
 		foreach (var medico in Medicos)
 		{
-			if (!medico.PeriodoDeDescansoEstaValido(this))
+			if (!medico.PeriodoDeDescansoEstaValido(this) && medico.Atividades.Count > 1)
 				erros.Add($"O médico '{medico.Nome}' está em periodo de descanso mandatório.");
 		}
 
