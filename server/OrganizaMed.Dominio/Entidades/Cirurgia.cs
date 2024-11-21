@@ -5,6 +5,10 @@ namespace OrganizaMed.Dominio.Entidades;
 
 public class Cirurgia : AtividadeBase
 {
+	public Cirurgia()
+	{
+	}
+
 	public Cirurgia(DateTime inicio, DateTime termino, params Medico[] medicos) : base(inicio, termino)
 	{
 		foreach (var medico in medicos)

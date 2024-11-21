@@ -5,6 +5,10 @@ namespace OrganizaMed.Dominio.ModuloAtividade;
 
 public class Consulta : AtividadeBase
 {
+	public Consulta()
+	{
+	}
+
 	public Consulta(DateTime inicio, DateTime termino, Medico medico) : base(inicio, termino)
 	{
 		Medicos.Add(medico);

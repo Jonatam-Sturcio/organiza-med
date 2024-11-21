@@ -19,6 +19,5 @@ public class MapeadorAtividadeOrm : IEntityTypeConfiguration<AtividadeBase>
 		builder.Property(x => x.HoraInicio).IsRequired().HasColumnType("datetime2");
 		builder.Property(x => x.HoraTermino).IsRequired().HasColumnType("datetime2");
 		builder.HasMany(x => x.Medicos).WithMany(x => x.Atividades).UsingEntity("TBAtividade_TBMedico");
-		builder.Property(x => x.TipoAtividade).IsRequired().HasColumnType("int");
 	}
 }

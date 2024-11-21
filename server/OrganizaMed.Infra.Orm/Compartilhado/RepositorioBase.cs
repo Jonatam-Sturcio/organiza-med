@@ -20,6 +20,18 @@ public class RepositorioBase<TEntidade> where TEntidade : Entidade
 		dbContext.SaveChanges();
 	}
 
+	public virtual void Editar(TEntidade novoRegistro)
+	{
+		registros.Update(novoRegistro);
+		dbContext.SaveChanges();
+	}
+
+	public virtual void Excluir(TEntidade novoRegistro)
+	{
+		registros.Remove(novoRegistro);
+		dbContext.SaveChanges();
+	}
+
 	public virtual TEntidade SelecionarPorId(Guid id)
 	{
 		return registros.SingleOrDefault(x => x.Id == id);
@@ -34,6 +46,19 @@ public class RepositorioBase<TEntidade> where TEntidade : Entidade
 	{
 		await registros.AddAsync(registro);
 		await dbContext.SaveChangesAsync();
+		return true;
+	}
+
+	public async Task<bool> EditarAsync(TEntidade registro)
+	{
+		registros.Update(registro);
+		await dbContext.SaveChangesAsync();
+		return true;
+	}
+
+	public async Task<bool> ExcluirAsync(TEntidade registro)
+	{
+		await registros.Where(x => x.Id == registro.Id).ExecuteDeleteAsync();
 		return true;
 	}
 
