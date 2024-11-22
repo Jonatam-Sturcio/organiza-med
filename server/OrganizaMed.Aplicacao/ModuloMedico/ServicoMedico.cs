@@ -1,10 +1,5 @@
 ﻿using FluentResults;
 using OrganizaMed.Dominio.ModuloMedico;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrganizaMed.Aplicacao.ModuloMedico;
 
@@ -19,7 +14,7 @@ public class ServicoMedico
 
 	public async Task<Result<Medico>> InserirAsync(Medico medico)
 	{
-		var validador = new ValidadorMedico();
+		var validador = new ValidadorMedico(repositorioMedico);
 
 		var resultado = await validador.ValidateAsync(medico);
 
