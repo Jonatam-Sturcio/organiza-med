@@ -8,5 +8,11 @@ public interface IRepositorio<T> where T : Entidade
 
 	Task<bool> InserirAsync(T novoRegistro);
 
+	void Editar(T registro);
+
+	void Excluir(T registro);
+
+	Task<T> SelecionarPorIdAsync(Guid id);
+
 	Task<List<T>> SelecionarTodosAsync();
 }

@@ -29,4 +29,37 @@ public class ServicoMedico
 
 		return Result.Ok(medico);
 	}
+
+	public async Task<Result<Medico>> EditarAsync(Medico medico)
+	{
+		var validador = new ValidadorMedico(repositorioMedico);
+
+		var resultado = await validador.ValidateAsync(medico);
+
+		if (!resultado.IsValid)
+		{
+			var erros = resultado.Errors.Select(err => err.ErrorMessage);
+
+			return Result.Fail(erros);
+		}
+		repositorioMedico.Editar(medico);
+
+		return Result.Ok(medico);
+	}
+
+	public async Task<Result<Medico>> ExcluirAsync(Guid id)
+	{
+		var medico = await repositorioMedico.SelecionarPorIdAsync(id);
+
+		repositorioMedico.Excluir(medico);
+
+		return Result.Ok();
+	}
+
+	public async Task<Result<List<Medico>>> SelecionarTodosAsync()
+	{
+		var medico = await repositorioMedico.SelecionarTodosAsync();
+
+		return Result.Ok(medico);
+	}
 }
