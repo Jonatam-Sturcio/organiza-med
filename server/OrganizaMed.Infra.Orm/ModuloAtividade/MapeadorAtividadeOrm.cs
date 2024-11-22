@@ -16,6 +16,7 @@ public class MapeadorAtividadeOrm : IEntityTypeConfiguration<AtividadeBase>
 			.HasValue<Consulta>(TipoAtividadeEnum.Consulta)
 			.HasValue<Cirurgia>(TipoAtividadeEnum.Cirurgia);
 
+		builder.Property(x => x.Id).ValueGeneratedNever();
 		builder.Property(x => x.HoraInicio).IsRequired().HasColumnType("datetime2");
 		builder.Property(x => x.HoraTermino).IsRequired().HasColumnType("datetime2");
 		builder.HasMany(x => x.Medicos).WithMany(x => x.Atividades).UsingEntity("TBAtividade_TBMedico");

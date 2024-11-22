@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OrganizaMed.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class Banco : Migration
+    public partial class addBanco : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

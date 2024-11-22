@@ -12,8 +12,8 @@ using OrganizaMed.Infra.Orm.Compartilhado;
 namespace OrganizaMed.Infra.Orm.Migrations
 {
     [DbContext(typeof(OrganizaMedDbContext))]
-    [Migration("20241121194338_Banco")]
-    partial class Banco
+    [Migration("20241122181302_addBanco")]
+    partial class addBanco
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,6 @@ namespace OrganizaMed.Infra.Orm.Migrations
             modelBuilder.Entity("OrganizaMed.Dominio.Compartilhado.AtividadeBase", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("HoraInicio")

@@ -16,7 +16,7 @@ public class RepositorioMedicoOrmTests : RepositorioEmOrmTestsBase
 		repositorioMedico.Inserir(registro);
 
 		//assert
-		Medico medicoEncontrado = repositorioMedico.SelecionarPorId(registro.Id);
+		var medicoEncontrado = repositorioMedico.SelecionarPorId(registro.Id);
 
 		Assert.AreEqual("Cleiton", medicoEncontrado.Nome);
 	}
@@ -35,7 +35,7 @@ public class RepositorioMedicoOrmTests : RepositorioEmOrmTestsBase
 		repositorioMedico.Editar(registroAtualizado);
 
 		//assert
-		Medico medicoEncontrado = repositorioMedico.SelecionarPorId(registro.Id);
+		var medicoEncontrado = repositorioMedico.SelecionarPorId(registroAtualizado.Id);
 
 		Assert.AreEqual("Cleiton Editado", medicoEncontrado.Nome);
 	}
@@ -53,7 +53,7 @@ public class RepositorioMedicoOrmTests : RepositorioEmOrmTestsBase
 		repositorioMedico.Excluir(registroExcluido);
 
 		//assert
-		Medico medicoEncontrado = repositorioMedico.SelecionarPorId(registroExcluido.Id);
+		var medicoEncontrado = repositorioMedico.SelecionarPorId(registroExcluido.Id);
 
 		Assert.IsNull(medicoEncontrado);
 	}
@@ -72,8 +72,8 @@ public class RepositorioMedicoOrmTests : RepositorioEmOrmTestsBase
 		repositorioMedico.Inserir(registro3);
 
 		//assert
-		var medicosEncontrado = repositorioMedico.SelecionarTodos();
+		var medicosEncontrados = repositorioMedico.SelecionarTodos();
 
-		Assert.AreEqual(3, medicosEncontrado.Count);
+		Assert.AreEqual(3, medicosEncontrados.Count);
 	}
 }

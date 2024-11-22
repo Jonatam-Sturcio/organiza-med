@@ -25,7 +25,6 @@ namespace OrganizaMed.Infra.Orm.Migrations
             modelBuilder.Entity("OrganizaMed.Dominio.Compartilhado.AtividadeBase", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("HoraInicio")
