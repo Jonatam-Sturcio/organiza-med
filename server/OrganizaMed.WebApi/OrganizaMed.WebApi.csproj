@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
       <PrivateAssets>all</PrivateAssets>
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OrganizaMed.Aplicacao\OrganizaMed.Aplicacao.csproj" />
     <ProjectReference Include="..\OrganizaMed.Dominio\OrganizaMed.Dominio.csproj" />
     <ProjectReference Include="..\OrganizaMed.Infra.Orm\OrganizaMed.Infra.Orm.csproj" />
   </ItemGroup>

@@ -1,5 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OrganizaMed.Aplicacao.ModuloMedico;
+using OrganizaMed.Dominio.ModuloMedico;
 using OrganizaMed.Infra.Orm.Compartilhado;
+using OrganizaMed.Infra.Orm.ModuloMedico;
+using OrganizaMed.WebApi.Config.Mapping;
 
 namespace OrganizaMed.WebApi;
 
@@ -25,6 +29,20 @@ public static class DependencyInjection
 			{
 				dbOptions.EnableRetryOnFailure();
 			});
+		});
+	}
+
+	public static void ConfigureCoreServices(this IServiceCollection services)
+	{
+		services.AddScoped<IRepositorioMedico, RepositorioMedicoOrm>();
+		services.AddScoped<ServicoMedico>();
+	}
+
+	public static void ConfigureAutoMapper(this IServiceCollection services)
+	{
+		services.AddAutoMapper(config =>
+		{
+			config.AddProfile<MedicoProfile>();
 		});
 	}
 }
