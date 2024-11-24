@@ -8,7 +8,7 @@ public class RepositorioBase<TEntidade> where TEntidade : Entidade
 	protected OrganizaMedDbContext dbContext;
 	protected DbSet<TEntidade> registros;
 
-	public RepositorioBase(DbContext ctx)
+	public RepositorioBase(IContextoPersistencia ctx)
 	{
 		this.dbContext = (OrganizaMedDbContext)ctx;
 		this.registros = dbContext.Set<TEntidade>();

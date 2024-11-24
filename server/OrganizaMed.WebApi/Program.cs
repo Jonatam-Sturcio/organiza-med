@@ -1,3 +1,6 @@
+using OrganizaMed.WebApi.Config;
+using Serilog;
+
 namespace OrganizaMed.WebApi;
 
 public class Program
@@ -10,6 +13,14 @@ public class Program
 
 		builder.Services.ConfigureDbContext(builder.Configuration, builder.Environment);
 
+		builder.Services.ConfigureCoreServices();
+
+		builder.Services.ConfigureAutoMapper();
+
+		builder.Services.ConfigureCors(politicaCors);
+
+		builder.Services.ConfigureSerilog(builder.Logging, builder.Configuration);
+
 		builder.Services.AddControllers();
 
 		builder.Services.AddEndpointsApiExplorer();
@@ -17,15 +28,32 @@ public class Program
 
 		var app = builder.Build();
 
+		app.UseGlobalExceptionHandler();
+
 		app.UseSwagger();
 		app.UseSwaggerUI();
 
+		var migracaoConcluida = app.AutoMigrateDatabase();
+
+		if (migracaoConcluida) Log.Information("Migração do branco de dados conclída");
+		else Log.Information("Nenhuma migração de bando de dados pendente");
+
 		app.UseHttpsRedirection();
+
+		app.UseCors(politicaCors);
 
 		app.UseAuthorization();
 
 		app.MapControllers();
 
-		app.Run();
+		try
+		{
+			app.Run();
+		}
+		catch (Exception ex)
+		{
+			Log.Fatal("Ocorreu um erro que ocasionou no fechamento da aplicação", ex);
+			return;
+		}
 	}
 }
