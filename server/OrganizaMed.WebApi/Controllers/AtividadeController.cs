@@ -3,6 +3,8 @@ using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using OrganizaMed.Aplicacao.ModuloAtividade;
 using OrganizaMed.Dominio.Compartilhado;
+using OrganizaMed.Dominio.Entidades;
+using OrganizaMed.Dominio.ModuloAtividade;
 using OrganizaMed.WebApi.ViewModels;
 
 namespace OrganizaMed.WebApi.Controllers;
@@ -54,13 +56,25 @@ public class AtividadeController(ServicoAtividade servicoAtividade, IMapper mape
 	[HttpPost]
 	public async Task<IActionResult> Post(InserirAtividadeViewModel atividadeVm)
 	{
-		var atividade = mapeador.Map<AtividadeBase>(atividadeVm);
-
-		var resultado = await servicoAtividade.InserirAsync(atividade);
-
-		if (resultado.IsFailed)
+		try
 		{
-			return BadRequest(resultado.Errors);
+			AtividadeBase atividade = atividadeVm.TipoAtividade switch
+			{
+				TipoAtividadeEnum.Consulta => mapeador.Map<Consulta>(atividadeVm),
+				TipoAtividadeEnum.Cirurgia => mapeador.Map<Cirurgia>(atividadeVm),
+				_ => throw new InvalidOperationException("Tipo de atividade desconhecido")
+			};
+
+			var resultado = await servicoAtividade.InserirAsync(atividade);
+
+			if (resultado.IsFailed)
+			{
+				return BadRequest(resultado.Errors);
+			}
+		}
+		catch (Exception ex)
+		{
+			return BadRequest(ex.Message);
 		}
 
 		return Ok(atividadeVm);

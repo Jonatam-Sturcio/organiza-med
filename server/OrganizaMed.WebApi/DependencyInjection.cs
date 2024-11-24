@@ -8,7 +8,7 @@ using OrganizaMed.Infra.Orm.Compartilhado;
 using OrganizaMed.Infra.Orm.ModuloAtividades;
 using OrganizaMed.Infra.Orm.ModuloMedico;
 using OrganizaMed.WebApi.Config.Mapping;
-using OrganizaMed.WebApi.Config.Mapping.Resolver;
+using OrganizaMed.WebApi.Config.Mapping.Action;
 using OrganizaMed.WebApi.Filters;
 using Serilog;
 
@@ -50,13 +50,12 @@ public static class DependencyInjection
 
 	public static void ConfigureAutoMapper(this IServiceCollection services)
 	{
+		services.AddScoped<ConfigurarMedicoMappingAction>();
 		services.AddAutoMapper(config =>
 		{
 			config.AddProfile<MedicoProfile>();
 			config.AddProfile<AtividadeProfile>();
 		});
-
-		services.AddTransient<AtividadeBaseResolver>();
 	}
 
 	public static void ConfigureCors(this IServiceCollection services, string politicaCors)

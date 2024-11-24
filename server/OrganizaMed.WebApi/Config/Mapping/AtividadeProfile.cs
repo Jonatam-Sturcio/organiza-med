@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using OrganizaMed.Dominio.Compartilhado;
-using OrganizaMed.WebApi.Config.Mapping.Resolver;
+using OrganizaMed.Dominio.Entidades;
+using OrganizaMed.Dominio.ModuloAtividade;
+using OrganizaMed.WebApi.Config.Mapping.Action;
 using OrganizaMed.WebApi.ViewModels;
 
 namespace OrganizaMed.WebApi.Config.Mapping;
@@ -9,8 +11,8 @@ public class AtividadeProfile : Profile
 {
 	public AtividadeProfile()
 	{
-		CreateMap<InserirAtividadeViewModel, AtividadeBase>().ConvertUsing<AtividadeBaseResolver>();
-		CreateMap<EditarAtividadeViewModel, AtividadeBase>();
+		CreateMap<FormsAtividadeViewModel, Consulta>().AfterMap<ConfigurarMedicoMappingAction>();
+		CreateMap<FormsAtividadeViewModel, Cirurgia>().AfterMap<ConfigurarMedicoMappingAction>();
 
 		CreateMap<AtividadeBase, ListarAtividadeViewModel>();
 		CreateMap<AtividadeBase, VisualizarAtividadeViewModel>();
