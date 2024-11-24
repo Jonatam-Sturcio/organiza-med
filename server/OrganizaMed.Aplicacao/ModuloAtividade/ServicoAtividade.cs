@@ -4,11 +4,11 @@ using OrganizaMed.Dominio.Entidades;
 
 namespace OrganizaMed.Aplicacao.ModuloAtividade;
 
-public class ServicoAtividadeBase
+public class ServicoAtividade
 {
 	private readonly IRepositorioAtividade repositorioAtividade;
 
-	public ServicoAtividadeBase(IRepositorioAtividade repositorioAtividadeBase)
+	public ServicoAtividade(IRepositorioAtividade repositorioAtividadeBase)
 	{
 		this.repositorioAtividade = repositorioAtividadeBase;
 	}

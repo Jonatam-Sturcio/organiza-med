@@ -6,7 +6,7 @@ using OrganizaMed.WebApi.ViewModels;
 
 namespace OrganizaMed.WebApi.Controllers;
 
-[Route("api/categorias")]
+[Route("api/medicos")]
 [ApiController]
 public class MedicoController(ServicoMedico servicoMedico, IMapper mapeador) : ControllerBase
 {
@@ -45,9 +45,9 @@ public class MedicoController(ServicoMedico servicoMedico, IMapper mapeador) : C
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> Post(InserirMedicoViewModel categoriaVm)
+	public async Task<IActionResult> Post(InserirMedicoViewModel medicoVm)
 	{
-		var categoria = mapeador.Map<Medico>(categoriaVm);
+		var categoria = mapeador.Map<Medico>(medicoVm);
 
 		var resultado = await servicoMedico.InserirAsync(categoria);
 
@@ -56,11 +56,11 @@ public class MedicoController(ServicoMedico servicoMedico, IMapper mapeador) : C
 			return BadRequest(resultado.Errors);
 		}
 
-		return Ok(categoriaVm);
+		return Ok(medicoVm);
 	}
 
 	[HttpPut("{id}")]
-	public async Task<IActionResult> Put(Guid id, EditarMedicoViewModel categoriaVm)
+	public async Task<IActionResult> Put(Guid id, EditarMedicoViewModel medicoVm)
 	{
 		var selecaoMedicoOriginal = await servicoMedico.SelecionarPorIdAsync(id);
 
@@ -69,7 +69,7 @@ public class MedicoController(ServicoMedico servicoMedico, IMapper mapeador) : C
 			return NotFound(selecaoMedicoOriginal.Errors);
 		}
 
-		var categoriaEditada = mapeador.Map(categoriaVm, selecaoMedicoOriginal.Value);
+		var categoriaEditada = mapeador.Map(medicoVm, selecaoMedicoOriginal.Value);
 
 		var resultado = await servicoMedico.EditarAsync(categoriaEditada);
 

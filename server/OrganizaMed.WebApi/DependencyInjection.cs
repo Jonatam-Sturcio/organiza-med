@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OrganizaMed.Aplicacao.ModuloAtividade;
 using OrganizaMed.Aplicacao.ModuloMedico;
 using OrganizaMed.Dominio.Compartilhado;
+using OrganizaMed.Dominio.Entidades;
 using OrganizaMed.Dominio.ModuloMedico;
 using OrganizaMed.Infra.Orm.Compartilhado;
+using OrganizaMed.Infra.Orm.ModuloAtividades;
 using OrganizaMed.Infra.Orm.ModuloMedico;
 using OrganizaMed.WebApi.Config.Mapping;
 using OrganizaMed.WebApi.Filters;
@@ -39,6 +42,9 @@ public static class DependencyInjection
 	{
 		services.AddScoped<IRepositorioMedico, RepositorioMedicoOrm>();
 		services.AddScoped<ServicoMedico>();
+
+		services.AddScoped<IRepositorioAtividade, RepositorioAtividadeOrm>();
+		services.AddScoped<ServicoAtividade>();
 	}
 
 	public static void ConfigureAutoMapper(this IServiceCollection services)
