@@ -15,4 +15,11 @@ public class ValidadorMedico : AbstractValidator<Medico>
 			.MustAsync(async (crm, cancel) => !await Task.Run(() => repositorioMedico.CrmExiste(crm))).WithMessage("Este CRM já está registrado.");
 		RuleFor(x => x.CRM).NotEmpty().Matches(@"^\d{5}-[A-Z]{2}$");
 	}
+
+	public ValidadorMedico()
+	{
+		RuleFor(x => x.Nome).NotEmpty().WithMessage("O nome é obrigatório");
+		RuleFor(x => x.Especialidade).NotEmpty().WithMessage("A especialidade é obrigatória");
+		RuleFor(x => x.CRM).NotEmpty().Matches(@"^\d{5}-[A-Z]{2}$");
+	}
 }
