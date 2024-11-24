@@ -11,6 +11,9 @@ public class ConfigurarMedicoMappingAction(IRepositorioMedico repositorioMedico)
 	{
 		var idMedico = source.MedicosId;
 
-		//	destination.Medicos = repositorioMedico.SelecionarPorId(idMedico);
+		foreach (Guid id in idMedico)
+		{
+			destination.Medicos.Add(repositorioMedico.SelecionarPorId(id));
+		}
 	}
 }
