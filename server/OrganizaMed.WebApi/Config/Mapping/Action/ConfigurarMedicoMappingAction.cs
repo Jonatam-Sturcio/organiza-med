@@ -10,6 +10,7 @@ public class ConfigurarMedicoMappingAction(IRepositorioMedico repositorioMedico)
 	public void Process(FormsAtividadeViewModel source, AtividadeBase destination, ResolutionContext context)
 	{
 		var idMedico = source.MedicosId;
+		destination.Medicos = new();
 
 		foreach (Guid id in idMedico)
 		{
