@@ -11,6 +11,11 @@ public class RepositorioAtividadeOrm : RepositorioBase<AtividadeBase>, IReposito
 	{
 	}
 
+	public new async Task<List<AtividadeBase>> SelecionarTodosAsync()
+	{
+		return await registros.Include(x => x.Medicos).ToListAsync();
+	}
+
 	public async Task<List<AtividadeBase>> Filtrar(Func<AtividadeBase, bool> predicate)
 	{
 		var atividades = await registros.Include(x => x.Medicos).ToListAsync();

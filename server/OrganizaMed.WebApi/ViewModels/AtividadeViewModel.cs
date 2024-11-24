@@ -24,7 +24,7 @@ public class ListarAtividadeViewModel
 
 	public DateTime HoraInicio { get; set; }
 	public DateTime HoraTermino { get; set; }
-	public ListarMedicoViewModel Medicos { get; set; }
+	public List<ListarMedicoViewModel> Medicos { get; set; }
 	public TipoAtividadeEnum TipoAtividade { get; set; }
 }
 
@@ -34,6 +34,6 @@ public class VisualizarAtividadeViewModel
 
 	public DateTime HoraInicio { get; set; }
 	public DateTime HoraTermino { get; set; }
-	public ListarMedicoViewModel Medicos { get; set; }
+	public List<ListarMedicoViewModel> Medicos { get; set; }
 	public TipoAtividadeEnum TipoAtividade { get; set; }
 }
