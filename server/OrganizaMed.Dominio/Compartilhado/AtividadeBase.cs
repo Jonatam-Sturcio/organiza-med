@@ -35,4 +35,14 @@ public abstract class AtividadeBase : Entidade
 
 		return erros;
 	}
+
+	public List<string> ValidarMedicosPorAtividade()
+	{
+		var erros = new List<string>();
+
+		if (this.tipoAtividade == TipoAtividadeEnum.Consulta && Medicos.Count > 1)
+			erros.Add("Não pode haver mais de um médico por consulta");
+
+		return erros;
+	}
 }
