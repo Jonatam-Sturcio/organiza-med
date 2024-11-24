@@ -19,11 +19,12 @@ public class Program
 
 		builder.Services.ConfigureCors(politicaCors);
 
+		builder.Services.ConfigureControllersWithFilters();
+
 		builder.Services.ConfigureSerilog(builder.Logging, builder.Configuration);
 
-		builder.Services.AddControllers();
-
 		builder.Services.AddEndpointsApiExplorer();
+
 		builder.Services.AddSwaggerGen();
 
 		var app = builder.Build();

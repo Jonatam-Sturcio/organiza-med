@@ -56,6 +56,13 @@ public class ServicoMedico
 		return Result.Ok();
 	}
 
+	public async Task<Result<Medico>> SelecionarPorIdAsync(Guid id)
+	{
+		var categoria = await repositorioMedico.SelecionarPorIdAsync(id);
+
+		return Result.Ok(categoria);
+	}
+
 	public async Task<Result<List<Medico>>> SelecionarTodosAsync()
 	{
 		var medico = await repositorioMedico.SelecionarTodosAsync();

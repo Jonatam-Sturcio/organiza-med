@@ -5,6 +5,7 @@ using OrganizaMed.Dominio.ModuloMedico;
 using OrganizaMed.Infra.Orm.Compartilhado;
 using OrganizaMed.Infra.Orm.ModuloMedico;
 using OrganizaMed.WebApi.Config.Mapping;
+using OrganizaMed.WebApi.Filters;
 using Serilog;
 
 namespace OrganizaMed.WebApi;
@@ -59,6 +60,14 @@ public static class DependencyInjection
 				.AllowAnyHeader()
 				.AllowAnyMethod();
 			});
+		});
+	}
+
+	public static void ConfigureControllersWithFilters(this IServiceCollection services)
+	{
+		services.AddControllers(options =>
+		{
+			options.Filters.Add<ResponseWrapperFilter>();
 		});
 	}
 
