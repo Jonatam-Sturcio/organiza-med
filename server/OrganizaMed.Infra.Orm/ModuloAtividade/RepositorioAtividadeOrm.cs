@@ -1,4 +1,5 @@
-﻿using OrganizaMed.Dominio.Compartilhado;
+﻿using Microsoft.EntityFrameworkCore;
+using OrganizaMed.Dominio.Compartilhado;
 using OrganizaMed.Dominio.Entidades;
 using OrganizaMed.Infra.Orm.Compartilhado;
 
@@ -8,5 +9,12 @@ public class RepositorioAtividadeOrm : RepositorioBase<AtividadeBase>, IReposito
 {
 	public RepositorioAtividadeOrm(IContextoPersistencia ctx) : base(ctx)
 	{
+	}
+
+	public async Task<List<AtividadeBase>> Filtrar(Func<AtividadeBase, bool> predicate)
+	{
+		var atividades = await registros.Include(x => x.Medicos).ToListAsync();
+
+		return atividades.Where(predicate).ToList();
 	}
 }

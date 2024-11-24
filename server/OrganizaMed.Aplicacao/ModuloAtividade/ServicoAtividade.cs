@@ -64,6 +64,13 @@ public class ServicoAtividade
 		return Result.Ok(categoria);
 	}
 
+	public async Task<Result<List<AtividadeBase>>> Filtrar(Func<AtividadeBase, bool> predicate)
+	{
+		var notas = await repositorioAtividade.Filtrar(predicate);
+
+		return Result.Ok(notas);
+	}
+
 	public async Task<Result<List<AtividadeBase>>> SelecionarTodosAsync()
 	{
 		var atividade = await repositorioAtividade.SelecionarTodosAsync();

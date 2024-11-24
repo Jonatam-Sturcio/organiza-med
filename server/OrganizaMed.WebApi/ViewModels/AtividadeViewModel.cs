@@ -1,22 +1,21 @@
 ﻿using OrganizaMed.Dominio.Compartilhado;
-using OrganizaMed.Dominio.ModuloMedico;
 
 namespace OrganizaMed.WebApi.ViewModels;
 
-public class InserirAtividadeViewModel
+public class FormsAtividadeViewModel
 {
 	public DateTime HoraInicio { get; set; }
 	public DateTime HoraTermino { get; set; }
-	public List<Medico> Medicos { get; set; }
+	public List<Guid> MedicosId { get; set; }
 	public TipoAtividadeEnum TipoAtividade { get; set; }
 }
 
-public class EditarAtividadeViewModel
+public class InserirAtividadeViewModel : FormsAtividadeViewModel
 {
-	public DateTime HoraInicio { get; set; }
-	public DateTime HoraTermino { get; set; }
-	public List<Medico> Medicos { get; set; }
-	public TipoAtividadeEnum TipoAtividade { get; set; }
+}
+
+public class EditarAtividadeViewModel : FormsAtividadeViewModel
+{
 }
 
 public class ListarAtividadeViewModel
@@ -25,7 +24,7 @@ public class ListarAtividadeViewModel
 
 	public DateTime HoraInicio { get; set; }
 	public DateTime HoraTermino { get; set; }
-	public List<Medico> Medicos { get; set; }
+	public ListarMedicoViewModel Medicos { get; set; }
 	public TipoAtividadeEnum TipoAtividade { get; set; }
 }
 
@@ -35,6 +34,6 @@ public class VisualizarAtividadeViewModel
 
 	public DateTime HoraInicio { get; set; }
 	public DateTime HoraTermino { get; set; }
-	public List<Medico> Medicos { get; set; }
+	public ListarMedicoViewModel Medicos { get; set; }
 	public TipoAtividadeEnum TipoAtividade { get; set; }
 }

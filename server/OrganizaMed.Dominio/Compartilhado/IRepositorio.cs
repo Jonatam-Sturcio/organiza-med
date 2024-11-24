@@ -6,6 +6,8 @@ public interface IRepositorio<T> where T : Entidade
 
 	List<T> SelecionarTodos();
 
+	T SelecionarPorId(Guid id);
+
 	Task<bool> InserirAsync(T novoRegistro);
 
 	void Editar(T registro);

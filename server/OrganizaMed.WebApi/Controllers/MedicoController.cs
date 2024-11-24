@@ -47,9 +47,9 @@ public class MedicoController(ServicoMedico servicoMedico, IMapper mapeador) : C
 	[HttpPost]
 	public async Task<IActionResult> Post(InserirMedicoViewModel medicoVm)
 	{
-		var categoria = mapeador.Map<Medico>(medicoVm);
+		var medico = mapeador.Map<Medico>(medicoVm);
 
-		var resultado = await servicoMedico.InserirAsync(categoria);
+		var resultado = await servicoMedico.InserirAsync(medico);
 
 		if (resultado.IsFailed)
 		{
@@ -69,9 +69,9 @@ public class MedicoController(ServicoMedico servicoMedico, IMapper mapeador) : C
 			return NotFound(selecaoMedicoOriginal.Errors);
 		}
 
-		var categoriaEditada = mapeador.Map(medicoVm, selecaoMedicoOriginal.Value);
+		var medicoEditada = mapeador.Map(medicoVm, selecaoMedicoOriginal.Value);
 
-		var resultado = await servicoMedico.EditarAsync(categoriaEditada);
+		var resultado = await servicoMedico.EditarAsync(medicoEditada);
 
 		if (resultado.IsFailed)
 		{

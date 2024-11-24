@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using OrganizaMed.Aplicacao.ModuloAtividade;
-
-using OrganizaMed.Aplicacao.ModuloAtividade;
-
 using OrganizaMed.Dominio.Compartilhado;
-using OrganizaMed.Dominio.ModuloAtividade;
 using OrganizaMed.WebApi.ViewModels;
 
 namespace OrganizaMed.WebApi.Controllers;
@@ -15,9 +12,16 @@ namespace OrganizaMed.WebApi.Controllers;
 public class AtividadeController(ServicoAtividade servicoAtividade, IMapper mapeador) : ControllerBase
 {
 	[HttpGet]
-	public async Task<IActionResult> Get()
+	public async Task<IActionResult> Get(TipoAtividadeEnum? tipoAtividade)
 	{
-		var resultado = await servicoAtividade.SelecionarTodosAsync();
+		Result<List<AtividadeBase>> resultado;
+
+		if (tipoAtividade != null)
+		{
+			resultado = await servicoAtividade.Filtrar(a => a.TipoAtividade == tipoAtividade);
+		}
+		else
+			resultado = await servicoAtividade.SelecionarTodosAsync();
 
 		if (resultado.IsFailed)
 		{
@@ -50,9 +54,9 @@ public class AtividadeController(ServicoAtividade servicoAtividade, IMapper mape
 	[HttpPost]
 	public async Task<IActionResult> Post(InserirAtividadeViewModel atividadeVm)
 	{
-		var categoria = mapeador.Map<AtividadeBase>(atividadeVm);
+		var atividade = mapeador.Map<AtividadeBase>(atividadeVm);
 
-		var resultado = await servicoAtividade.InserirAsync(categoria);
+		var resultado = await servicoAtividade.InserirAsync(atividade);
 
 		if (resultado.IsFailed)
 		{
@@ -72,9 +76,9 @@ public class AtividadeController(ServicoAtividade servicoAtividade, IMapper mape
 			return NotFound(selecaoAtividadeOriginal.Errors);
 		}
 
-		var categoriaEditada = mapeador.Map(atividadeVm, selecaoAtividadeOriginal.Value);
+		var atividadeEditada = mapeador.Map(atividadeVm, selecaoAtividadeOriginal.Value);
 
-		var resultado = await servicoAtividade.EditarAsync(categoriaEditada);
+		var resultado = await servicoAtividade.EditarAsync(atividadeEditada);
 
 		if (resultado.IsFailed)
 		{
