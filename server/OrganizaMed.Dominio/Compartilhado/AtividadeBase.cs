@@ -1,4 +1,5 @@
 ﻿using OrganizaMed.Dominio.ModuloMedico;
+using System.Text.Json.Serialization;
 
 namespace OrganizaMed.Dominio.Compartilhado;
 
@@ -17,7 +18,10 @@ public abstract class AtividadeBase : Entidade
 
 	public DateTime HoraInicio { get; set; }
 	public DateTime HoraTermino { get; set; }
+
+	[JsonIgnore]
 	public List<Medico> Medicos { get; set; }
+
 	public abstract TipoAtividadeEnum TipoAtividade { get; set; }
 	protected TipoAtividadeEnum tipoAtividade;
 
