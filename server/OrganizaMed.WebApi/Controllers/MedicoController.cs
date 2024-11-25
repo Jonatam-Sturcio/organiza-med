@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using OrganizaMed.Aplicacao.ModuloMedico;
 using OrganizaMed.Dominio.ModuloMedico;
@@ -11,9 +12,18 @@ namespace OrganizaMed.WebApi.Controllers;
 public class MedicoController(ServicoMedico servicoMedico, IMapper mapeador) : ControllerBase
 {
 	[HttpGet]
-	public async Task<IActionResult> Get()
+	public async Task<IActionResult> Get(bool? maisAtividades)
 	{
-		var resultado = await servicoMedico.SelecionarTodosAsync();
+		Result<List<Medico>> resultado;
+
+		if (maisAtividades != null && maisAtividades == true)
+		{
+			resultado = await servicoMedico.FiltrarPorMedicosComMaisAtividades();
+		}
+		else
+		{
+			resultado = await servicoMedico.SelecionarTodosAsync();
+		}
 
 		if (resultado.IsFailed)
 		{

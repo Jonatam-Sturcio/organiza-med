@@ -63,6 +63,13 @@ public class ServicoMedico
 		return Result.Ok(categoria);
 	}
 
+	public async Task<Result<List<Medico>>> FiltrarPorMedicosComMaisAtividades()
+	{
+		var notas = await repositorioMedico.OrdenarMedicosComMaisAtividades();
+
+		return Result.Ok(notas);
+	}
+
 	public async Task<Result<List<Medico>>> SelecionarTodosAsync()
 	{
 		var medico = await repositorioMedico.SelecionarTodosAsync();

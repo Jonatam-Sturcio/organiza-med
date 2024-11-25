@@ -11,6 +11,13 @@ public class RepositorioMedicoOrm : RepositorioBase<Medico>, IRepositorioMedico
 	{
 	}
 
+	public async Task<List<Medico>> OrdenarMedicosComMaisAtividades()
+	{
+		var medicos = await registros.Include(x => x.Atividades).ToListAsync();
+
+		return medicos.OrderByDescending(x => x.Atividades.Count).ToList();
+	}
+
 	public override Medico SelecionarPorId(Guid id)
 	{
 		return registros.Include(x => x.Atividades).SingleOrDefault(x => x.Id == id);
