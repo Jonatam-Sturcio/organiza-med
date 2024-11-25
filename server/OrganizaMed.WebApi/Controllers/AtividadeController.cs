@@ -94,11 +94,13 @@ public class AtividadeController(ServicoAtividade servicoAtividade, IMapper mape
 
 		var resultado = await servicoAtividade.EditarAsync(atividadeEditada);
 
+		var resultadoVm = mapeador.Map<ListarAtividadeViewModel>(resultado.Value);
+
 		if (resultado.IsFailed)
 		{
 			return BadRequest(resultado.Errors);
 		}
-		return Ok(resultado.Value);
+		return Ok(resultadoVm);
 	}
 
 	[HttpDelete("{id}")]
