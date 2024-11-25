@@ -11,6 +11,11 @@ public class RepositorioAtividadeOrm : RepositorioBase<AtividadeBase>, IReposito
 	{
 	}
 
+	public override async Task<AtividadeBase> SelecionarPorIdAsync(Guid id)
+	{
+		return await registros.Include(x => x.Medicos).SingleOrDefaultAsync(x => x.Id == id);
+	}
+
 	public new async Task<List<AtividadeBase>> SelecionarTodosAsync()
 	{
 		return await registros.Include(x => x.Medicos).ToListAsync();
