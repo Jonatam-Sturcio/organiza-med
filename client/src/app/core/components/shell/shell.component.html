@@ -7,8 +7,8 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar>
-      <span class="d-flex align-items-center gap-2">
+    <mat-toolbar style="background-color: transparent; width: 250px">
+      <span class="d-flex align-items-center gap-2 fs-3">
         <mat-icon>medical_information</mat-icon>
         Organiza-Med
       </span>
@@ -21,7 +21,7 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content class="min-vh-100">
     <mat-toolbar color="primary">
       <button
         *ngIf="isHandset$ | async"
