@@ -22,18 +22,18 @@ export class MedicoService {
   constructor(private http: HttpClient) {}
 
   cadastrar(
-    novaMedico: InserirMedicoViewModel
+    novoMedico: InserirMedicoViewModel
   ): Observable<MedicoInseridoViewModel> {
-    return this.http.post<MedicoInseridoViewModel>(this.url, novaMedico);
+    return this.http.post<MedicoInseridoViewModel>(this.url, novoMedico);
   }
 
   editar(
     id: string,
-    MedicoEditada: EdicaoMedicoViewModel
+    MedicoEditado: EdicaoMedicoViewModel
   ): Observable<MedicoEditadoViewModel> {
     const urlCompleto = `${this.url}/${id}`;
 
-    return this.http.put<MedicoEditadoViewModel>(urlCompleto, MedicoEditada);
+    return this.http.put<MedicoEditadoViewModel>(urlCompleto, MedicoEditado);
   }
 
   excluir(id: string): Observable<MedicoExcluidoViewModel> {
