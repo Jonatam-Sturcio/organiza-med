@@ -14,6 +14,7 @@ import { RouterLink, Router } from '@angular/router';
 import { NotificacaoService } from '../../../core/notificacao/notificacao.service';
 import { InserirMedicoViewModel } from '../models/medico.models';
 import { MedicoService } from '../services/medico.service';
+import { ValidadorCustomizadoCRM } from '../Validator/ValidadorCustomizado';
 
 @Component({
   selector: 'app-cadastro-medico',
@@ -43,7 +44,10 @@ export class CadastroMedicoComponent {
         Validators.required,
         Validators.minLength(3),
       ]),
-      crm: new FormControl<string>('', [Validators.required]),
+      crm: new FormControl<string>('', [
+        Validators.required,
+        ValidadorCustomizadoCRM(/^\d{5}-[A-Z]{2}$/),
+      ]),
       especialidade: new FormControl<string>('', [
         Validators.required,
         Validators.minLength(3),

@@ -22,7 +22,10 @@
           <input formControlName="crm" matInput placeholder="Ex: 00000-AA" />
           <mat-icon matSuffix color="secondary">assignment_ind</mat-icon>
           <mat-error *ngIf="crm?.invalid && (crm?.errors)!['required']"
-            >O crm é obrigatório!</mat-error
+            >O CRM é obrigatório!</mat-error
+          >
+          <mat-error *ngIf="crm?.invalid && (crm?.errors)!['invalidFormat']"
+            >O CRM precisa ter o formato "00000-AA"!</mat-error
           >
         </mat-form-field>
         <mat-form-field class="w-100" appearance="fill">
