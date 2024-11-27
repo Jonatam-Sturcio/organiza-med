@@ -20,20 +20,23 @@
   <div *ngIf="medicos$ | async as itens" class="row g-3 mt-2">
     <div *ngFor="let item of itens" class="col-md-6 col-lg-4 col-xxl-3">
       <mat-card
-        class="card-animado mat-mdc-elevation-specific mat-elevation-z3 h-100"
+        class="card-animado mat-mdc-elevation-specific mat-elevation-z3 h-100 mat-card"
       >
-        <mat-card-header class="d-flex flex-column">
+        <mat-card-header class="fw-bold">
           <mat-card-title class="titulo-card fs-3">{{
             item.nome
           }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="d-flex flex-column mt-2">
           <span>CRM: {{ item.crm }}</span>
           <span>Especialidade: {{ item.especialidade }}</span>
-        </mat-card-header>
+        </mat-card-content>
 
         <mat-card-footer class="d-flex justify-content-end gap-1 p-3 mt-auto">
           <a
             mat-icon-button
-            class="botao-editar"
+            class="botao-icone"
             matTooltip="Editar {{ item.nome }}"
             [routerLink]="['/medicos', 'editar', item.id]"
           >
@@ -41,7 +44,7 @@
           </a>
           <a
             mat-icon-button
-            class="botao-excluir"
+            class="botao-icone"
             matTooltip="Excluir {{ item.nome }}"
             [routerLink]="['/medicos', 'excluir', item.id]"
           >
