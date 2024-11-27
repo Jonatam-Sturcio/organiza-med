@@ -66,7 +66,9 @@ public class MedicoController(ServicoMedico servicoMedico, IMapper mapeador) : C
 			return BadRequest(resultado.Errors);
 		}
 
-		return Ok(medicoVm);
+		var resultadoMedico = mapeador.Map<ListarMedicoViewModel>(medico);
+
+		return Ok(resultadoMedico);
 	}
 
 	[HttpPut("{id}")]

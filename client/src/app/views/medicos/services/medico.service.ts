@@ -25,9 +25,10 @@ export class MedicoService {
   cadastrar(
     novoMedico: InserirMedicoViewModel
   ): Observable<MedicoInseridoViewModel> {
-    return this.http
-      .post<MedicoInseridoViewModel>(this.url, novoMedico)
-      .pipe(map((x) => this.processarRes(x) as MedicoInseridoViewModel));
+    return this.http.post<MedicoInseridoViewModel>(this.url, novoMedico).pipe(
+      map((x) => this.processarRes(x) as MedicoInseridoViewModel),
+      tap((x) => console.log(x))
+    );
   }
 
   editar(
