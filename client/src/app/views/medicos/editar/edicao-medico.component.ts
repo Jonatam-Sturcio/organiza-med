@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -10,14 +10,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink, Router } from '@angular/router';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { NotificacaoService } from '../../../core/notificacao/notificacao.service';
-import { InserirMedicoViewModel } from '../models/medico.models';
-import { MedicoService } from '../services/medico.service';
+import {
+  EdicaoMedicoViewModel,
+  InserirMedicoViewModel,
+  VisualizarMedicoViewModel,
+} from '../models/medico.models';
 import { ValidadorCustomizadoCRM } from '../Validator/ValidadorCustomizado';
+import { MedicoService } from '../services/medico.service';
 
 @Component({
-  selector: 'app-cadastro-medico',
+  selector: 'app-edicao-medico',
   standalone: true,
   imports: [
     NgIf,
@@ -28,12 +32,14 @@ import { ValidadorCustomizadoCRM } from '../Validator/ValidadorCustomizado';
     MatIconModule,
     MatButtonModule,
   ],
-  templateUrl: './cadastro-medico.component.html',
+  templateUrl: './edicao-medico.component.html',
 })
-export class CadastroMedicoComponent {
+export class EdicaoMedicoComponent implements OnInit {
+  id?: string;
   MedicoForm: FormGroup;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private MedicoService: MedicoService,
     private notificacao: NotificacaoService
@@ -64,17 +70,39 @@ export class CadastroMedicoComponent {
     return this.MedicoForm.get('especialidade');
   }
 
-  cadastrar() {
+  ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
+
+    if (!this.id) {
+      this.notificacao.erro('Não foi possível recuperar o id requisitado!');
+      return;
+    }
+    this.MedicoService.selecionarPorId(this.id).subscribe((res) =>
+      this.carregarFormulario(res)
+    );
+  }
+
+  editar() {
     if (this.MedicoForm.invalid) return;
 
-    const novoMedico: InserirMedicoViewModel = this.MedicoForm.value;
+    if (!this.id) {
+      this.notificacao.erro('Não foi possível recuperar o id requisitado!');
 
-    this.MedicoService.cadastrar(novoMedico).subscribe((res) => {
+      return;
+    }
+
+    const novoMedico: EdicaoMedicoViewModel = this.MedicoForm.value;
+
+    this.MedicoService.editar(this.id, novoMedico).subscribe((res) => {
       this.notificacao.sucesso(
         `O registro ID [${res.id}] foi cadastrado com sucesso!`
       );
 
       this.router.navigate(['/medicos']);
     });
+  }
+
+  private carregarFormulario(registro: VisualizarMedicoViewModel) {
+    this.MedicoForm.patchValue(registro);
   }
 }

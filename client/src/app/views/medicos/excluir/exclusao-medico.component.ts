@@ -13,7 +13,6 @@ import { MedicoService } from '../services/medico.service';
   standalone: true,
   imports: [NgIf, RouterLink, AsyncPipe, MatButtonModule, MatIconModule],
   templateUrl: './exclusao-medico.component.html',
-  styleUrl: './exclusao-medico.component.scss',
 })
 export class ExclusaoMedicoComponent implements OnInit {
   id?: string;
