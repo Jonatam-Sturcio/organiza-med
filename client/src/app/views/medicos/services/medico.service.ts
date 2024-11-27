@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import { map, Observable, tap } from 'rxjs';
+
 import {
   InserirMedicoViewModel,
   MedicoInseridoViewModel,
@@ -12,12 +12,13 @@ import {
   ListarMedicoViewModel,
   VisualizarMedicoViewModel,
 } from '../models/medico.models';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MedicoService {
-  private readonly url = `${environment.apiUrl}/Medicos`;
+  private readonly url = `${environment.apiUrl}/medicos`;
 
   constructor(private http: HttpClient) {}
 
@@ -43,12 +44,15 @@ export class MedicoService {
   }
 
   selecionarTodos(): Observable<ListarMedicoViewModel[]> {
-    const urlCompleto = `${this.url}/?maisAtividades=false`;
-    return this.http.get<ListarMedicoViewModel[]>(urlCompleto);
+    const urlCompleto = `${this.url}?maisAtividades=false`;
+    return this.http.get<ListarMedicoViewModel[]>(urlCompleto).pipe(
+      map((x) => this.processarRes(x) as ListarMedicoViewModel[]),
+      tap((x) => console.log(x))
+    );
   }
 
   selecionarTodosOrdenado(): Observable<ListarMedicoViewModel[]> {
-    const urlCompleto = `${this.url}/?maisAtividades=true`;
+    const urlCompleto = `${this.url}?maisAtividades=true`;
     return this.http.get<ListarMedicoViewModel[]>(urlCompleto);
   }
 
@@ -56,5 +60,9 @@ export class MedicoService {
     const urlCompleto = `${this.url}/${id}`;
 
     return this.http.get<VisualizarMedicoViewModel>(urlCompleto);
+  }
+
+  private processarRes(res: any): any {
+    return res.dados;
   }
 }

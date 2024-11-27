@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { ListarMedicoViewModel } from '../models/medico.models';
 import { MedicoService } from '../services/medico.service';
 
@@ -26,7 +26,7 @@ import { MedicoService } from '../services/medico.service';
   styleUrl: './listagem-medicos.component.scss',
 })
 export class ListagemMedicosComponent implements OnInit {
-  medicos$?: Observable<ListarMedicoViewModel[]>;
+  medicos$?: Observable<any>;
 
   constructor(private medicoService: MedicoService) {}
 

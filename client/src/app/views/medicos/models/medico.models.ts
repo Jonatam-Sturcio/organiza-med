@@ -35,7 +35,7 @@ export interface ListarMedicoViewModel {
   id: string;
   nome: string;
   especialidade: string;
-  CRM: string;
+  crm: string;
 }
 
 export interface MedicoExcluidoViewModel {}

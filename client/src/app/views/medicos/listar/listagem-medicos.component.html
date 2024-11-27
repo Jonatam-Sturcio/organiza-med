@@ -22,10 +22,11 @@
       <mat-card
         class="card-animado mat-mdc-elevation-specific mat-elevation-z3 h-100"
       >
-        <mat-card-header>
-          <mat-card-title class="titulo-card">{{ item.nome }}</mat-card-title>
-
-          <span>CRM: {{ item.CRM }}</span>
+        <mat-card-header class="d-flex flex-column">
+          <mat-card-title class="titulo-card fs-3">{{
+            item.nome
+          }}</mat-card-title>
+          <span>CRM: {{ item.crm }}</span>
           <span>Especialidade: {{ item.especialidade }}</span>
         </mat-card-header>
 
