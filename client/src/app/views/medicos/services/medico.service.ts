@@ -45,9 +45,7 @@ export class MedicoService {
   excluir(id: string): Observable<MedicoExcluidoViewModel> {
     const urlCompleto = `${this.url}/${id}`;
 
-    return this.http
-      .delete<MedicoExcluidoViewModel>(urlCompleto)
-      .pipe(map((x) => this.processarRes(x) as MedicoExcluidoViewModel));
+    return this.http.delete<MedicoExcluidoViewModel>(urlCompleto);
   }
 
   selecionarTodos(): Observable<ListarMedicoViewModel[]> {
