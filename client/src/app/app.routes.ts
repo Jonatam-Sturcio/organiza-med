@@ -11,4 +11,9 @@ export const routes: Routes = [
         (c) => DashboardComponent
       ),
   },
+  {
+    path: 'medicos',
+    loadChildren: () =>
+      import('./views/medicos/medicos.routes').then((m) => m.MedicosRoutes),
+  },
 ];
