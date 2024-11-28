@@ -37,7 +37,7 @@ export class ShellComponent {
       rota: '/dashboard',
     },
     {
-      titulo: 'Medicos',
+      titulo: 'Médicos',
       icone: 'groups',
       rota: '/medicos',
     },

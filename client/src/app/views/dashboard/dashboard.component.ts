@@ -24,17 +24,20 @@ import { ItemDashboard } from './models/item-dashboard.model';
 export class DashboardComponent {
   itens: ItemDashboard[] = [
     {
-      titulo: 'Medicos',
-      descricao: 'Gerencie as categorias utilizadas para organizar as notas.',
+      titulo: 'Médicos',
+      descricao:
+        'Organize o cadastro e as especialidades dos médicos de forma simples e prática.',
       rota: '/medicos',
       icone: 'groups',
+      cypressTag: 'medicos',
     },
     {
       titulo: 'Atividades',
       descricao:
-        'Gerencie as suas tarefas do dia-a-dia com notas que você pode organizar.',
+        'Gerencie atividades de maneira integrada, garantindo organização e eficiência.',
       rota: '/atividades',
       icone: 'medical_services',
+      cypressTag: 'atividades',
     },
   ];
 }

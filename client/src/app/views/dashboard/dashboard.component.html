@@ -24,6 +24,7 @@
           <a
             mat-icon-button
             class="botao-icone"
+            [attr.data-cy]="item.cypressTag"
             matTooltip="Ir para {{ item.titulo }}"
             [routerLink]="item.rota"
           >

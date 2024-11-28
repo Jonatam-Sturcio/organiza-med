@@ -8,7 +8,12 @@
       <form [formGroup]="MedicoForm" (submit)="editar()">
         <mat-form-field class="w-100" appearance="fill">
           <mat-label>Nome do Médico</mat-label>
-          <input formControlName="nome" matInput placeholder="Ex: Jonas" />
+          <input
+            data-cy="nome"
+            formControlName="nome"
+            matInput
+            placeholder="Ex: Jonas"
+          />
           <mat-icon matSuffix color="secondary">person</mat-icon>
           <mat-error *ngIf="nome?.invalid && (nome?.errors)!['required']"
             >O nome é obrigatório!</mat-error
@@ -51,7 +56,12 @@
         </mat-form-field>
 
         <div class="row justify-content-end g-2 gap-2 mt-5">
-          <button type="submit" mat-flat-button class="col-sm-4 col-md-3">
+          <button
+            type="submit"
+            mat-flat-button
+            class="col-sm-4 col-md-3"
+            data-cy="confirmar"
+          >
             <mat-icon matIconPrefix>check</mat-icon>
             Confirmar
           </button>
