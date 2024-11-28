@@ -41,7 +41,7 @@ describe('Processo de redirecionamento para modulo Medicos', () => {
     cy.contains('Nome Cypress Editado');
   });
 
-  it('Deve excluir uma categoria', () => {
+  it('Deve excluir um medico', () => {
     cy.get('[data-cy=excluir]').last().click();
 
     cy.get('[data-cy=confirmar]').click();
