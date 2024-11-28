@@ -5,9 +5,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import { ListarMedicoViewModel } from '../models/medico.models';
 import { MedicoService } from '../services/medico.service';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-listagem-medicos',
@@ -21,16 +22,43 @@ import { MedicoService } from '../services/medico.service';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
+    MatChipsModule,
   ],
   templateUrl: './listagem-medicos.component.html',
   styleUrl: './listagem-medicos.component.scss',
 })
 export class ListagemMedicosComponent implements OnInit {
   medicos$?: Observable<any>;
+  ordenado: boolean;
 
-  constructor(private medicoService: MedicoService) {}
+  medicosEmCache: ListarMedicoViewModel[];
+  medicosOrdenados: ListarMedicoViewModel[];
+
+  constructor(private medicoService: MedicoService) {
+    this.medicosEmCache = [];
+    this.medicosOrdenados = [];
+    this.ordenado = false;
+  }
 
   ngOnInit(): void {
-    this.medicos$ = this.medicoService.selecionarTodos();
+    this.medicoService.selecionarTodos().subscribe((medicos) => {
+      this.medicosEmCache = medicos;
+
+      this.medicos$ = of(medicos);
+    });
+
+    this.medicoService.selecionarTodosOrdenados().subscribe((medicos) => {
+      this.medicosOrdenados = medicos;
+    });
+  }
+
+  ordenarMedicos() {
+    if (!this.ordenado) {
+      this.medicos$ = of(this.medicosOrdenados);
+      this.ordenado = true;
+      return;
+    }
+    this.ordenado = false;
+    this.medicos$ = of(this.medicosEmCache);
   }
 }

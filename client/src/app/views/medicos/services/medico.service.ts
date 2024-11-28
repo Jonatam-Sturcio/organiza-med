@@ -54,7 +54,12 @@ export class MedicoService {
       .get<ListarMedicoViewModel[]>(urlCompleto)
       .pipe(map((x) => this.processarRes(x) as ListarMedicoViewModel[]));
   }
-
+  selecionarTodosOrdenados(): Observable<ListarMedicoViewModel[]> {
+    const urlCompleto = `${this.url}?maisAtividades=true`;
+    return this.http
+      .get<ListarMedicoViewModel[]>(urlCompleto)
+      .pipe(map((x) => this.processarRes(x) as ListarMedicoViewModel[]));
+  }
   selecionarPorId(id: string): Observable<VisualizarMedicoViewModel> {
     const urlCompleto = `${this.url}/${id}`;
 

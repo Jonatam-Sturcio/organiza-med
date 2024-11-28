@@ -16,6 +16,11 @@
   </section>
 
   <hr />
+  <mat-chip-listbox>
+    <mat-chip-option (click)="ordenarMedicos()"
+      >Ordenar por quantidade de atividades</mat-chip-option
+    >
+  </mat-chip-listbox>
 
   <div *ngIf="medicos$ | async as itens" class="row g-3 mt-2">
     <div *ngFor="let item of itens" class="col-md-6 col-lg-4 col-xxl-3">
