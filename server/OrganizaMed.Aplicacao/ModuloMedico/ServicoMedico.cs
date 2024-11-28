@@ -14,7 +14,7 @@ public class ServicoMedico
 
 	public async Task<Result<Medico>> InserirAsync(Medico medico)
 	{
-		var validador = new ValidadorMedico(repositorioMedico);
+		var validador = new ValidadorMedico(repositorioMedico, false);
 
 		var resultado = await validador.ValidateAsync(medico);
 
@@ -32,7 +32,7 @@ public class ServicoMedico
 
 	public async Task<Result<Medico>> EditarAsync(Medico medico)
 	{
-		var validador = new ValidadorMedico(repositorioMedico);
+		var validador = new ValidadorMedico(repositorioMedico, true);
 
 		var resultado = await validador.ValidateAsync(medico);
 
