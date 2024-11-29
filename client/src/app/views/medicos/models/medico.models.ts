@@ -29,6 +29,7 @@ export interface VisualizarMedicoViewModel {
   nome: string;
   especialidade: string;
   CRM: string;
+  //Atividades: ListarAtividadesViewModel[]
 }
 
 export interface ListarMedicoViewModel {

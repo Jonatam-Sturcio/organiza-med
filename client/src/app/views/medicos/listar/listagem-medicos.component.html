@@ -41,6 +41,14 @@
           <a
             mat-icon-button
             class="botao-icone"
+            matTooltip="Visualizar {{ item.nome }}"
+            [routerLink]="['/medicos', 'visualizar', item.id]"
+          >
+            <mat-icon>visibility</mat-icon>
+          </a>
+          <a
+            mat-icon-button
+            class="botao-icone"
             data-cy="editar"
             matTooltip="Editar {{ item.nome }}"
             [routerLink]="['/medicos', 'editar', item.id]"
