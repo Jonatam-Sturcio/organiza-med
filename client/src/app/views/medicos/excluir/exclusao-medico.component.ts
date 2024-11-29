@@ -17,9 +17,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   selector: 'app-exclusao-medico',
   standalone: true,
   imports: [
-    NgIf,
-    NgForOf,
-    AsyncPipe,
     RouterLink,
     MatCardModule,
     MatIconModule,
