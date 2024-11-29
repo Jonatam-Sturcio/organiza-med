@@ -6,6 +6,7 @@ import { EdicaoMedicoComponent } from './editar/edicao-medico.component';
 import { inject } from '@angular/core';
 import { VisualizarMedicoViewModel } from './models/medico.models';
 import { MedicoService } from './services/medico.service';
+import { DetalhesMedicoComponent } from './visualizar/detalhes-medico.component';
 
 const visualizarMedicosResolver: ResolveFn<VisualizarMedicoViewModel> = (
   route: ActivatedRouteSnapshot
@@ -23,5 +24,12 @@ export const MedicosRoutes: Routes = [
     path: 'excluir/:id',
     component: ExclusaoMedicoComponent,
     resolve: { medico: visualizarMedicosResolver },
+  },
+  {
+    path: 'visualizar/:id',
+    component: DetalhesMedicoComponent,
+    resolve: {
+      medico: visualizarMedicosResolver,
+    },
   },
 ];
