@@ -1,4 +1,7 @@
-import { VisualizarMedicoViewModel } from '../../medicos/models/medico.models';
+import {
+  ListarMedicoViewModel,
+  VisualizarMedicoViewModel,
+} from '../../medicos/models/medico.models';
 import { tipoAtividadeEnum } from './tipoAtividadeEnum';
 
 export interface InserirAtividadeViewModel {
@@ -36,7 +39,7 @@ export interface VisualizarAtividadeViewModel {
   horaInicio: Date;
   horaTermino: Date;
   tipoAtividade: tipoAtividadeEnum;
-  medicosId: number[];
+  medicos: ListarMedicoViewModel[];
 }
 
 export interface ListarAtividadeViewModel {
