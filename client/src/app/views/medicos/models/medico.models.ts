@@ -1,3 +1,5 @@
+import { ListarAtividadeViewModel } from '../../atividades/models/atividade.models';
+
 export interface InserirMedicoViewModel {
   nome: string;
   especialidade: string;
@@ -29,7 +31,7 @@ export interface VisualizarMedicoViewModel {
   nome: string;
   especialidade: string;
   CRM: string;
-  //Atividades: ListarAtividadesViewModel[]
+  Atividades: ListarAtividadeViewModel[];
 }
 
 export interface ListarMedicoViewModel {
