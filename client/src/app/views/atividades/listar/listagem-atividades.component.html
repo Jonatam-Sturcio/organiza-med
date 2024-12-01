@@ -1,0 +1,74 @@
+<main class="container my-4">
+  <h1 class="fs-2">Listagem de Atividades</h1>
+
+  <section
+    aria-label="Opções"
+    class="row justify-content-center justify-content-lg-start g-1"
+  >
+    <a
+      mat-flat-button
+      data-cy="cadastrar"
+      class="col-md-6 col-lg-4 col-xxl-2 fs-6 py-4"
+      [routerLink]="['/atividades', 'cadastrar']"
+    >
+      <mat-icon>bookmark_add</mat-icon>
+      Cadastrar
+    </a>
+  </section>
+
+  <hr />
+  <mat-chip-listbox>
+    <mat-chip-option (click)="ordenarAtividades(2)">Todos</mat-chip-option>
+    <mat-chip-option (click)="ordenarAtividades(0)">Cirurgias</mat-chip-option>
+    <mat-chip-option (click)="ordenarAtividades(1)">Consultas</mat-chip-option>
+  </mat-chip-listbox>
+
+  <div *ngIf="atividades$ | async as itens" class="row g-3 mt-2">
+    <div *ngFor="let item of itens" class="col-md-6 col-lg-4 col-xxl-3">
+      <mat-card
+        class="card-animado mat-mdc-elevation-specific mat-elevation-z3 h-100 mat-card"
+      >
+        <mat-card-header class="fw-bold">
+          <mat-card-title class="titulo-card">{{
+            obterTextoTipoAtividade(item.tipoAtividade)
+          }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="d-flex flex-column mt-2">
+          <span>Data: {{ formatarData(item.horaInicio) }}</span>
+          <span>Hora de Inicio: {{ formatarHora(item.horaInicio) }}</span>
+          <span>Hora de Termino: {{ formatarHora(item.horaTermino) }}</span>
+        </mat-card-content>
+
+        <mat-card-footer class="d-flex justify-content-end gap-1 p-3 mt-auto">
+          <a
+            mat-icon-button
+            class="botao-icone"
+            matTooltip="Visualizar {{ item.nome }}"
+            [routerLink]="['/atividades', 'visualizar', item.id]"
+          >
+            <mat-icon>visibility</mat-icon>
+          </a>
+          <a
+            mat-icon-button
+            class="botao-icone"
+            data-cy="editar"
+            matTooltip="Editar {{ item.nome }}"
+            [routerLink]="['/atividades', 'editar', item.id]"
+          >
+            <mat-icon>edit</mat-icon>
+          </a>
+          <a
+            mat-icon-button
+            class="botao-icone"
+            data-cy="excluir"
+            matTooltip="Excluir {{ item.nome }}"
+            [routerLink]="['/atividades', 'excluir', item.id]"
+          >
+            <mat-icon>delete</mat-icon>
+          </a>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+</main>
