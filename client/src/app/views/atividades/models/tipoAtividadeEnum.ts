@@ -1,4 +1,4 @@
-export enum tipoAtividade {
+export enum tipoAtividadeEnum {
   Cirurgia,
   Consulta,
 }

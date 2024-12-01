@@ -30,8 +30,8 @@ export interface VisualizarMedicoViewModel {
   id: string;
   nome: string;
   especialidade: string;
-  CRM: string;
-  Atividades: ListarAtividadeViewModel[];
+  crm: string;
+  atividades: ListarAtividadeViewModel[];
 }
 
 export interface ListarMedicoViewModel {
