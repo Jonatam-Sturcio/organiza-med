@@ -14,10 +14,17 @@
         <mat-card-content class="d-grid mt-2">
           <span>CRM: {{ Medico?.crm }}</span>
           <span>Especialidade: {{ Medico?.especialidade }}</span>
+          <span class="mt-1">Lista de Atividades: </span>
+          <li *ngFor="let item of Medico?.atividades">
+            {{ obterTextoTipoAtividade(item.tipoAtividade) }} -
+            {{ formatarData(item.horaInicio) }}
+          </li>
         </mat-card-content>
       </mat-card>
 
-      <p>Deseja realmente excluir o médico "{{ Medico?.nome }}"?</p>
+      <p class="mt-2 fs-6">
+        Deseja realmente excluir o médico "{{ Medico?.nome }}"?
+      </p>
 
       <div class="row justify-content-end g-2 gap-1 mt-5">
         <button
