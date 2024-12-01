@@ -94,12 +94,13 @@ public class AtividadeController(ServicoAtividade servicoAtividade, IMapper mape
 
 		var resultado = await servicoAtividade.EditarAsync(atividadeEditada);
 
-		var resultadoVm = mapeador.Map<ListarAtividadeViewModel>(resultado.Value);
-
 		if (resultado.IsFailed)
 		{
 			return BadRequest(resultado.Errors);
 		}
+
+		var resultadoVm = mapeador.Map<VisualizarAtividadeViewModel>(atividadeEditada);
+
 		return Ok(resultadoVm);
 	}
 

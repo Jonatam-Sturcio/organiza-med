@@ -1,6 +1,4 @@
-﻿using OrganizaMed.Dominio.Compartilhado;
-
-namespace OrganizaMed.WebApi.ViewModels;
+﻿namespace OrganizaMed.WebApi.ViewModels;
 
 public class InserirMedicoViewModel
 {
@@ -33,5 +31,5 @@ public class VisualizarMedicoViewModel
 	public string Especialidade { get; set; }
 	public string CRM { get; set; }
 
-	public List<AtividadeBase> Atividades { get; set; }
+	public List<ListarAtividadeViewModel> Atividades { get; set; }
 }
