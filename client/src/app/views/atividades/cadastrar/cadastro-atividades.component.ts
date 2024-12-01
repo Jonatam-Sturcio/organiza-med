@@ -15,7 +15,10 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { NotificacaoService } from '../../../core/notificacao/notificacao.service';
 import { ValidadorCustomizadoCRM } from '../../medicos/Validator/ValidadorCustomizado';
-import { InserirAtividadeViewModel } from '../models/atividade.models';
+import {
+  AtividadeInseridaViewModel,
+  InserirAtividadeViewModel,
+} from '../models/atividade.models';
 import { AtividadeService } from '../services/atividades.service';
 import { tipoAtividadeEnum } from '../models/tipoAtividadeEnum';
 import { ListarMedicoViewModel } from '../../medicos/models/medico.models';
@@ -94,12 +97,9 @@ export class CadastroAtividadesComponent implements OnInit {
 
     novaAtividade.horaTermino = this.obterDataHora('horaTermino');
 
-    this.AtividadeService.cadastrar(novaAtividade).subscribe((res) => {
-      this.notificacao.sucesso(
-        `O registro ID [${res.id}] foi cadastrado com sucesso!`
-      );
-
-      this.router.navigate(['/atividades']);
+    this.AtividadeService.cadastrar(novaAtividade).subscribe({
+      next: (atividadeInserida) => this.processarSucesso(atividadeInserida),
+      error: (erro) => this.processarFalha(erro),
     });
   }
 
@@ -112,5 +112,17 @@ export class CadastroAtividadesComponent implements OnInit {
     const [horaParte, minutoParte] = hora.split(':').map(Number);
     dataObj.setHours(horaParte - 6, minutoParte, 0, 0);
     return dataObj;
+  }
+
+  private processarSucesso(registro: AtividadeInseridaViewModel): void {
+    this.notificacao.sucesso(
+      `Atividade "${registro.id}" cadastrada com sucesso!`
+    );
+
+    this.router.navigate(['/atividades', 'listar']);
+  }
+
+  private processarFalha(erro: Error) {
+    this.notificacao.erro(erro.message);
   }
 }

@@ -12,7 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink, Router } from '@angular/router';
 import { NotificacaoService } from '../../../core/notificacao/notificacao.service';
-import { InserirMedicoViewModel } from '../models/medico.models';
+import {
+  InserirMedicoViewModel,
+  MedicoInseridoViewModel,
+} from '../models/medico.models';
 import { MedicoService } from '../services/medico.service';
 import { ValidadorCustomizadoCRM } from '../Validator/ValidadorCustomizado';
 
@@ -69,12 +72,18 @@ export class CadastroMedicoComponent {
 
     const novoMedico: InserirMedicoViewModel = this.MedicoForm.value;
 
-    this.MedicoService.cadastrar(novoMedico).subscribe((res) => {
-      this.notificacao.sucesso(
-        `O registro ID [${res.id}] foi cadastrado com sucesso!`
-      );
-
-      this.router.navigate(['/medicos']);
+    this.MedicoService.cadastrar(novoMedico).subscribe({
+      next: (medicoInserido) => this.processarSucesso(medicoInserido),
+      error: (erro) => this.processarFalha(erro),
     });
+  }
+  private processarSucesso(registro: MedicoInseridoViewModel): void {
+    this.notificacao.sucesso(`Medico "${registro.id}" cadastrada com sucesso!`);
+
+    this.router.navigate(['/medicos', 'listar']);
+  }
+
+  private processarFalha(erro: Error) {
+    this.notificacao.erro(erro.message);
   }
 }

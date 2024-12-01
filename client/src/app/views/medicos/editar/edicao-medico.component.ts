@@ -15,6 +15,7 @@ import { NotificacaoService } from '../../../core/notificacao/notificacao.servic
 import {
   EdicaoMedicoViewModel,
   InserirMedicoViewModel,
+  MedicoEditadoViewModel,
   VisualizarMedicoViewModel,
 } from '../models/medico.models';
 import { ValidadorCustomizadoCRM } from '../Validator/ValidadorCustomizado';
@@ -93,16 +94,22 @@ export class EdicaoMedicoComponent implements OnInit {
 
     const novoMedico: EdicaoMedicoViewModel = this.MedicoForm.value;
 
-    this.MedicoService.editar(this.id, novoMedico).subscribe((res) => {
-      this.notificacao.sucesso(
-        `O registro ID [${res.id}] foi cadastrado com sucesso!`
-      );
-
-      this.router.navigate(['/medicos']);
+    this.MedicoService.editar(this.id, novoMedico).subscribe({
+      next: (medicoEditado) => this.processarSucesso(medicoEditado),
+      error: (erro) => this.processarFalha(erro),
     });
   }
 
   private carregarFormulario(registro: VisualizarMedicoViewModel) {
     this.MedicoForm.patchValue(registro);
+  }
+  private processarSucesso(registro: MedicoEditadoViewModel): void {
+    this.notificacao.sucesso(`Medico "${registro.id}" editado com sucesso!`);
+
+    this.router.navigate(['/medicos', 'listar']);
+  }
+
+  private processarFalha(erro: Error) {
+    this.notificacao.erro(erro.message);
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { map, Observable, tap } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 
 import {
   InserirMedicoViewModel,
@@ -27,7 +27,7 @@ export class MedicoService {
   ): Observable<MedicoInseridoViewModel> {
     return this.http.post<MedicoInseridoViewModel>(this.url, novoMedico).pipe(
       map((x) => this.processarRes(x) as MedicoInseridoViewModel),
-      tap((x) => console.log(x))
+      catchError(this.processarFalha)
     );
   }
 
@@ -39,7 +39,10 @@ export class MedicoService {
 
     return this.http
       .put<MedicoEditadoViewModel>(urlCompleto, MedicoEditado)
-      .pipe(map((x) => this.processarRes(x) as MedicoEditadoViewModel));
+      .pipe(
+        map((x) => this.processarRes(x) as MedicoEditadoViewModel),
+        catchError(this.processarFalha)
+      );
   }
 
   excluir(id: string): Observable<MedicoExcluidoViewModel> {
@@ -50,25 +53,31 @@ export class MedicoService {
 
   selecionarTodos(): Observable<ListarMedicoViewModel[]> {
     const urlCompleto = `${this.url}?maisAtividades=false`;
-    return this.http
-      .get<ListarMedicoViewModel[]>(urlCompleto)
-      .pipe(map((x) => this.processarRes(x) as ListarMedicoViewModel[]));
+    return this.http.get<ListarMedicoViewModel[]>(urlCompleto).pipe(
+      map((x) => this.processarRes(x) as ListarMedicoViewModel[]),
+      catchError(this.processarFalha)
+    );
   }
   selecionarTodosOrdenados(): Observable<ListarMedicoViewModel[]> {
     const urlCompleto = `${this.url}?maisAtividades=true`;
-    return this.http
-      .get<ListarMedicoViewModel[]>(urlCompleto)
-      .pipe(map((x) => this.processarRes(x) as ListarMedicoViewModel[]));
+    return this.http.get<ListarMedicoViewModel[]>(urlCompleto).pipe(
+      map((x) => this.processarRes(x) as ListarMedicoViewModel[]),
+      catchError(this.processarFalha)
+    );
   }
   selecionarPorId(id: string): Observable<VisualizarMedicoViewModel> {
     const urlCompleto = `${this.url}/${id}`;
 
-    return this.http
-      .get<VisualizarMedicoViewModel>(urlCompleto)
-      .pipe(map((x) => this.processarRes(x) as VisualizarMedicoViewModel));
+    return this.http.get<VisualizarMedicoViewModel>(urlCompleto).pipe(
+      map((x) => this.processarRes(x) as VisualizarMedicoViewModel),
+      catchError(this.processarFalha)
+    );
   }
 
   private processarRes(res: any): any {
     return res.dados;
+  }
+  private processarFalha(resposta: any) {
+    return throwError(() => new Error(resposta.error.erros[0]));
   }
 }
