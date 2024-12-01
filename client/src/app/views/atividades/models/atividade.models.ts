@@ -5,7 +5,7 @@ export interface InserirAtividadeViewModel {
   horaInicio: Date;
   horaTermino: Date;
   tipoAtividade: tipoAtividadeEnum;
-  medicos: VisualizarMedicoViewModel[];
+  medicosId: number[];
 }
 
 export interface AtividadeInseridaViewModel {
@@ -13,14 +13,14 @@ export interface AtividadeInseridaViewModel {
   horaInicio: Date;
   horaTermino: Date;
   tipoAtividade: tipoAtividadeEnum;
-  medicos: VisualizarMedicoViewModel[];
+  medicosId: number[];
 }
 
 export interface EdicaoAtividadeViewModel {
   horaInicio: Date;
   horaTermino: Date;
   tipoAtividade: tipoAtividadeEnum;
-  medicos: VisualizarMedicoViewModel[];
+  medicosId: number[];
 }
 
 export interface AtividadeEditadaViewModel {
@@ -28,7 +28,7 @@ export interface AtividadeEditadaViewModel {
   horaInicio: Date;
   horaTermino: Date;
   tipoAtividade: tipoAtividadeEnum;
-  medicos: VisualizarMedicoViewModel[];
+  medicosId: number[];
 }
 
 export interface VisualizarAtividadeViewModel {
@@ -36,7 +36,7 @@ export interface VisualizarAtividadeViewModel {
   horaInicio: Date;
   horaTermino: Date;
   tipoAtividade: tipoAtividadeEnum;
-  medicos: VisualizarMedicoViewModel[];
+  medicosId: number[];
 }
 
 export interface ListarAtividadeViewModel {

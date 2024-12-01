@@ -56,9 +56,10 @@ public class AtividadeController(ServicoAtividade servicoAtividade, IMapper mape
 	[HttpPost]
 	public async Task<IActionResult> Post(InserirAtividadeViewModel atividadeVm)
 	{
+		AtividadeBase atividade;
 		try
 		{
-			AtividadeBase atividade = atividadeVm.TipoAtividade switch
+			atividade = atividadeVm.TipoAtividade switch
 			{
 				TipoAtividadeEnum.Consulta => mapeador.Map<Consulta>(atividadeVm),
 				TipoAtividadeEnum.Cirurgia => mapeador.Map<Cirurgia>(atividadeVm),
@@ -76,8 +77,9 @@ public class AtividadeController(ServicoAtividade servicoAtividade, IMapper mape
 		{
 			return BadRequest(ex.Message);
 		}
+		var resultadoAtividade = mapeador.Map<ListarAtividadeViewModel>(atividade);
 
-		return Ok(atividadeVm);
+		return Ok(resultadoAtividade);
 	}
 
 	[HttpPut("{id}")]

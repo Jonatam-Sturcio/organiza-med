@@ -27,10 +27,7 @@ export class AtividadeService {
   ): Observable<AtividadeInseridaViewModel> {
     return this.http
       .post<AtividadeInseridaViewModel>(this.url, novoAtividade)
-      .pipe(
-        map((x) => this.processarRes(x) as AtividadeInseridaViewModel),
-        tap((x) => console.log(x))
-      );
+      .pipe(map((x) => this.processarRes(x) as AtividadeInseridaViewModel));
   }
 
   editar(
