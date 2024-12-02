@@ -36,7 +36,7 @@
             data-cy="horaInicio"
             placeholder="Ex: 14:30"
           />
-          <mat-icon matSuffix color="primary">schedule</mat-icon>
+          <mat-icon matSuffix color="secondary">schedule</mat-icon>
           <mat-error class="text-white" *ngIf="horaInicio?.invalid">
             <span *ngIf="horaInicio?.errors?.['required']"
               >A hora de início precisa ser preenchida.</span
@@ -53,7 +53,7 @@
             data-cy="horaTermino"
             placeholder="Ex: 16:30"
           />
-          <mat-icon matSuffix color="primary">history_toggle_off</mat-icon>
+          <mat-icon matSuffix color="secondary">history_toggle_off</mat-icon>
           <mat-error class="text-white" *ngIf="horaTermino?.invalid">
             <span *ngIf="horaTermino?.errors?.['required']"
               >A hora de término precisa ser preenchida.</span
