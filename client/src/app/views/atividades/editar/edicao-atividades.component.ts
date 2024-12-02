@@ -138,6 +138,7 @@ export class EdicaoAtividadesComponent implements OnInit {
     dataI.setDate(dataI.getDate() + 1);
 
     this.AtividadeForm.patchValue({
+      tipoAtividade: registro.tipoAtividade,
       data: dataI.toISOString().split('T')[0],
       horaInicio: dataI.toISOString().split('T')[1].split('.')[0],
       horaTermino: dataT.toISOString().split('T')[1].split('.')[0],
