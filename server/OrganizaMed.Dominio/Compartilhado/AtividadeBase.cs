@@ -30,7 +30,7 @@ public abstract class AtividadeBase : Entidade
 
 		foreach (var medico in Medicos)
 		{
-			if (!medico.HorarioAtividadeEstaValido(this) && medico.Atividades.Count > 0)
+			if (!medico.HorarioAtividadeEstaValido(this) && medico.Atividades.Count > 1)
 				erros.Add($"Horário indisponivel.");
 		}
 
