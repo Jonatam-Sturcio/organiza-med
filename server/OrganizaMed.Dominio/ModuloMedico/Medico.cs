@@ -47,7 +47,7 @@ public class Medico : Entidade
 				periodoDeDescansoValido = true;
 
 			DateTime sobreposicao = atividade.HoraTermino.Add(atividade.ObterPeriodoDescanso());
-			if (sobreposicao > atividadeRegistrada.HoraInicio)
+			if (sobreposicao >= atividadeRegistrada.HoraInicio)
 				periodoDeDescansoValido = false;
 		}
 		return periodoDeDescansoValido;
