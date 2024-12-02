@@ -1,11 +1,11 @@
 <main class="container my-4">
   <div class="row justify-content-center g-3 mt-2">
     <div class="col-md-10 col-xxl-6">
-      <h1 class="fs-2">Cadastro de Atividade</h1>
+      <h1 class="fs-2">Edição de Atividade</h1>
 
       <hr />
 
-      <form [formGroup]="AtividadeForm" (submit)="cadastrar()">
+      <form [formGroup]="AtividadeForm" (submit)="editar()">
         <mat-form-field class="w-100 mt-3" appearance="fill">
           <mat-label>Data</mat-label>
           <input

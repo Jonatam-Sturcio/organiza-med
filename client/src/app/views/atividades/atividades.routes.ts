@@ -8,6 +8,7 @@ import { ExclusaoAtividadesComponent } from './excluir/exclusao-atividades.compo
 import { VisualizarAtividadeViewModel } from './models/atividade.models';
 import { AtividadeService } from './services/atividades.service';
 import { DetalhesAtividadeComponent } from './visualizar/detalhes-atividade.component';
+import { EdicaoAtividadesComponent } from './editar/edicao-atividades.component';
 
 const visualizarAtividadesResolver: ResolveFn<VisualizarAtividadeViewModel> = (
   route: ActivatedRouteSnapshot
@@ -29,6 +30,11 @@ export const AtividadesRoutes: Routes = [
     resolve: {
       medicos: ListagemMedicosResolver,
     },
+  },
+  {
+    path: 'editar/:id',
+    component: EdicaoAtividadesComponent,
+    resolve: { medicos: ListagemMedicosResolver },
   },
   {
     path: 'excluir/:id',
