@@ -25,8 +25,7 @@ export class DashboardComponent {
   itens: ItemDashboard[] = [
     {
       titulo: 'Médicos',
-      descricao:
-        'Organize o cadastro e as especialidades dos médicos de forma simples e prática.',
+      descricao: 'Organize o cadastro dos médicos de forma simples e prática.',
       rota: '/medicos',
       icone: 'groups',
       cypressTag: 'medicos',
