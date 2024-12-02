@@ -39,7 +39,6 @@ export class ListagemAtividadesComponent implements OnInit {
   ngOnInit(): void {
     this.atividadeService.selecionarTodos().subscribe((atividades) => {
       this.atividadesEmCache = atividades;
-
       this.atividades$ = of(atividades);
     });
   }

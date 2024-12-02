@@ -38,6 +38,10 @@
           <span>Data: {{ formatarData(item.horaInicio) }}</span>
           <span>Hora de Inicio: {{ formatarHora(item.horaInicio) }}</span>
           <span>Hora de Termino: {{ formatarHora(item.horaTermino) }}</span>
+          <span class="mt-2">Medico(s):</span>
+          <li *ngFor="let it of item.medicos">
+            {{ it.nome }}
+          </li>
         </mat-card-content>
 
         <mat-card-footer class="d-flex justify-content-end gap-1 p-3 mt-auto">
