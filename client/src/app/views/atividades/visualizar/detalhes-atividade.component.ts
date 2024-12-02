@@ -26,12 +26,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 export class DetalhesAtividadeComponent implements OnInit {
   Atividade?: VisualizarAtividadeViewModel;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private AtividadeService: AtividadeService,
-    private notificacao: NotificacaoService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.Atividade = this.route.snapshot.data['atividade'];
@@ -46,5 +41,14 @@ export class DetalhesAtividadeComponent implements OnInit {
     var date = new Date(data!);
     var [ano, mes, dia] = date.toISOString().split('T')[0].split('-');
     return `${dia}/${mes}/${ano}`;
+  }
+  public formatarHora(data: Date | undefined): string | null {
+    var date = new Date(data!);
+    var [hora, minuto] = date
+      .toISOString()
+      .split('T')[1]
+      .split('.')[0]
+      .split(':');
+    return `${hora}:${minuto}`;
   }
 }

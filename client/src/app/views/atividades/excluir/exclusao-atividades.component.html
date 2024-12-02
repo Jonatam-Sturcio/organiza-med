@@ -14,9 +14,14 @@
         </mat-card-header>
 
         <mat-card-content class="d-grid mt-2">
-          <span>Data de Inicio: {{ formatarData(Atividade?.horaInicio) }}</span>
           <span
-            >Data de Término: {{ formatarData(Atividade?.horaTermino) }}</span
+            >Data de Inicio: {{ formatarData(Atividade?.horaInicio) }} -
+            {{ formatarHora(Atividade?.horaInicio) }}</span
+          >
+
+          <span
+            >Data de Término: {{ formatarData(Atividade?.horaTermino) }} -
+            {{ formatarHora(Atividade?.horaTermino) }}</span
           >
           <span class="mt-1">Lista de Medicos: </span>
           <li *ngFor="let item of Atividade?.medicos">

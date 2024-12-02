@@ -62,4 +62,13 @@ export class ExclusaoAtividadesComponent implements OnInit {
     var [ano, mes, dia] = date.toISOString().split('T')[0].split('-');
     return `${dia}/${mes}/${ano}`;
   }
+  public formatarHora(data: Date | undefined): string | null {
+    var date = new Date(data!);
+    var [hora, minuto] = date
+      .toISOString()
+      .split('T')[1]
+      .split('.')[0]
+      .split(':');
+    return `${hora}:${minuto}`;
+  }
 }
