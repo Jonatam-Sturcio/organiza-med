@@ -7,6 +7,7 @@
 Desenvolvido durante o curso Full-Stack da [Academia do Programador](https://www.academiadoprogramador.net) 2024
 
 ---
+
 ## Descrição
 
 Uma clínica médica é um centro onde atividades, como cirurgias e consultas, são realizadas por profissionais médicos.
@@ -17,8 +18,8 @@ Cada médico é identificado pelo CRM que é composto por cinco dígitos e a sig
 
 As atividades dos médicos têm um horário de início e término e existem dois tipos diferentes de atividades, vejamos:
 
-	• Realizar Consulta: Sempre realizada por um único médico.
-	• Realizar Cirurgia: Pode ser realizada por um médico individualmente ou por uma equipe de médicos.
+    • Realizar Consulta: Sempre realizada por um único médico.
+    • Realizar Cirurgia: Pode ser realizada por um médico individualmente ou por uma equipe de médicos.
 
 Os médicos podem realizar atividades durante o dia inteiro, em todos os dias do ano. No entanto, cada vez que um
 médico termina uma atividade, é necessário um tempo de descanso para recuperação. Independentemente da duração
@@ -27,44 +28,47 @@ consulta médica.
 
 **Escopo da Solução**
 
-	• O aplicativo deve permitir agendar atividades em qualquer momento (futuro ou passado).
-	• Quando uma atividade é criada, deve ser possível indicar os horários de início e término, o tipo de atividade e o
-	médico (ou lista de médicos) que está realizando essa atividade.
+    • O aplicativo deve permitir agendar atividades em qualquer momento (futuro ou passado).
+    • Quando uma atividade é criada, deve ser possível indicar os horários de início e término, o tipo de atividade e o
+    médico (ou lista de médicos) que está realizando essa atividade.
 
 **Diversão Opcional? Não é obrigatório, mas você pode ampliar o escopo da solução com alguns dos pontos abaixo:**
 
-	• É possível modificar os horários de uma atividade existente.
-	• É possível excluir uma atividade existente.
-	• O aplicativo indica quando a atividade de um médico entra em conflito com outras atividades do mesmo médico,
-	devido à sobreposição de horários.
-	• Esses conflitos ajudarão os usuários do aplicativo a ajustarem os horários das atividades para que o problema
-	possa ser resolvido.
-	• O aplicativo mostra uma lista dos 10 médicos que mais horas trabalharam dentro de um período.
-
+    • É possível modificar os horários de uma atividade existente.
+    • É possível excluir uma atividade existente.
+    • O aplicativo indica quando a atividade de um médico entra em conflito com outras atividades do mesmo médico,
+    devido à sobreposição de horários.
+    • Esses conflitos ajudarão os usuários do aplicativo a ajustarem os horários das atividades para que o problema
+    possa ser resolvido.
+    • O aplicativo mostra uma lista dos 10 médicos que mais horas trabalharam dentro de um período.
 
 ---
+
 ## Funcionalidades
 
 1. O cadastro do **Médico** consiste de:
-    - Nome
-    - CRM
-    - Especialidade
+
+   - Nome
+   - CRM
+   - Especialidade
 
 2. O cadastro do **Atividades** consiste de:
-	- Tipo da Atividade
-	- Data/Hora de Inicio
-	- Data/Hora de Termino  
-	- Medicos
+   - Tipo da Atividade
+   - Data/Hora de Inicio
+   - Data/Hora de Termino
+   - Medicos
 
 ---
+
 ## Requisitos para Execução do Projeto Completo
 
 - .NET SDK (recomendado .NET 8.0 ou superior) para compilação e execução do projeto back-end.
 - Node.js v20+
-- Angular v18 
+- Angular v18
 
 ---
-## Executando o Back-End 
+
+## Executando o Back-End
 
 Vá para a pasta do projeto da WebAPI:
 
@@ -83,7 +87,8 @@ A API poderá ser acessada no endereço `https://localhost:8000/api`.
 A documentação **OpenAPI** também estará disponível em: `https://localhost:8000/swagger`.
 
 ---
-## Executando o Front-End 
+
+## Executando o Front-End
 
 Vá para a pasta do projeto Angular:
 
@@ -104,3 +109,20 @@ npm start
 ```
 
 A aplicação Angular estárá disponível no endereço `http://localhost:4200`.
+
+## Extra
+
+Para funcionar corretamente é necessário adicionar o seguinte no "segredos de usuário" de cada projeto.
+
+**_OrganizaMed.WebApi_**
+
+```
+"SQLSERVER_CONNECTION_STRING": "Data Source=(LOCALDB)\\MSSQLLOCALDB;Initial Catalog=OrganizaMed;Integrated Security=True",
+"SERILOG_LICENSE_KEY": "c21f8a34dae133e4a001553b9a845e68FFFFNRAL"
+```
+
+**_OrganizaMed.Infra.Tests_**
+
+```
+ "SQLSERVER_CONNECTION_STRING": "Data Source=(LOCALDB)\\MSSQLLOCALDB;Initial Catalog=OrganizaMedTests;Integrated Security=True"
+```
