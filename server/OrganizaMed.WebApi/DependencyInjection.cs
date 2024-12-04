@@ -55,6 +55,7 @@ public static class DependencyInjection
 		{
 			config.AddProfile<MedicoProfile>();
 			config.AddProfile<AtividadeProfile>();
+			config.AddProfile<UsuarioProfile>();
 		});
 	}
 
