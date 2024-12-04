@@ -20,13 +20,13 @@ public class Program
 
 		builder.Services.ConfigureCors(politicaCors);
 
-		builder.Services.ConfigureIdentity();
-
-		builder.Services.ConfigureJwt(builder.Configuration);
-
 		builder.Services.ConfigureControllersWithFilters();
 
 		builder.Services.ConfigureSerilog(builder.Logging, builder.Configuration);
+
+		builder.Services.ConfigureIdentity();
+
+		builder.Services.ConfigureJwt(builder.Configuration);
 
 		builder.Services.ConfigureSwaggerAuthorization();
 

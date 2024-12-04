@@ -17,7 +17,7 @@ public class UsuarioResolver : IValueResolver<Object, Object, Guid>
 	{
 		var consultaUsuario = contextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
 
-		if (consultaUsuario == null) throw new AuthenticationFailureException($"Não foi possívelobter a claim de autenticação do usuário ID: {id}");
+		if (consultaUsuario == null) throw new AuthenticationFailureException($"Não foi possível obter a claim de autenticação do usuário ID: {id}");
 		return Guid.Parse(consultaUsuario.Value);
 	}
 }

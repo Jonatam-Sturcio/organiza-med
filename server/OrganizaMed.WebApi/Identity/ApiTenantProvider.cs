@@ -5,6 +5,8 @@ namespace OrganizaMed.WebApi.Identity;
 
 public class ApiTenantProvider : ITenantProvider
 {
+	private readonly IHttpContextAccessor ContextAccessor;
+
 	public ApiTenantProvider(IHttpContextAccessor contextAccessor)
 	{
 		ContextAccessor = contextAccessor;
@@ -22,6 +24,4 @@ public class ApiTenantProvider : ITenantProvider
 			return Guid.Parse(claimId.Value);
 		}
 	}
-
-	public IHttpContextAccessor ContextAccessor { get; }
 }
