@@ -13,11 +13,36 @@
         Organiza-Med
       </span>
     </mat-toolbar>
-    <mat-nav-list>
-      <a *ngFor="let link of links" mat-list-item [routerLink]="link.rota">
-        <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
-        {{ link.titulo }}
+
+    <mat-nav-list class="auth-nav-list" *ngIf="usuarioAutenticado">
+      <a
+        [matMenuTriggerFor]="menu"
+        mat-list-item
+        class="auth-trigger-menu-opcoes"
+      >
+        <mat-icon matListItemIcon>verified_user</mat-icon>
+        {{ usuarioAutenticado.userName }}
       </a>
+
+      <mat-menu #menu class="auth-menu-opcoes">
+        <button mat-menu-item class="auth-menu-item" (click)="logoutAcionado()">
+          <mat-icon matListItemIcon>logout</mat-icon>
+          Logout
+        </button>
+      </mat-menu>
+    </mat-nav-list>
+
+    <mat-nav-list>
+      <ng-container *ngIf="usuarioAutenticado">
+        <a
+          *ngFor="let link of authLinks"
+          mat-list-item
+          [routerLink]="link.rota"
+        >
+          <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
+          {{ link.titulo }}
+        </a>
+      </ng-container>
     </mat-nav-list>
   </mat-sidenav>
 
