@@ -29,7 +29,7 @@ public class Medico : Entidade
 
 	public bool HorarioAtividadeEstaValido(AtividadeBase atividade)
 	{
-		var periodoDeDescansoValido = false;
+		var periodoDeDescansoValido = true;
 
 		foreach (var atividadeRegistrada in Atividades)
 		{
@@ -43,11 +43,7 @@ public class Medico : Entidade
 			else
 				diferencial = atividadeRegistrada.HoraInicio.Subtract(atividade.HoraTermino);
 
-			if (diferencial > atividadeRegistrada.ObterPeriodoDescanso())
-				periodoDeDescansoValido = true;
-
-			DateTime sobreposicao = atividade.HoraTermino.Add(atividade.ObterPeriodoDescanso());
-			if (sobreposicao >= atividadeRegistrada.HoraInicio)
+			if (diferencial <= atividadeRegistrada.ObterPeriodoDescanso())
 				periodoDeDescansoValido = false;
 		}
 		return periodoDeDescansoValido;
