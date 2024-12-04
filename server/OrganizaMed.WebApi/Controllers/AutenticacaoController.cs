@@ -16,10 +16,10 @@ public class AutenticacaoController : ControllerBase
 	private readonly IMapper mapeador;
 	private readonly JsonWebTokenProvider geradorTokens;
 
-	public AutenticacaoController(JsonWebTokenProvider geradorTokens, ServicoAutenticacao servicoAutenticacao, IMapper mapeador)
+	public AutenticacaoController(JsonWebTokenProvider geradorTokens, ServicoAutenticacao ServicoAutenticacao, IMapper Mapeador)
 	{
-		servicoAutenticacao = servicoAutenticacao;
-		mapeador = mapeador;
+		servicoAutenticacao = ServicoAutenticacao;
+		mapeador = Mapeador;
 		this.geradorTokens = geradorTokens;
 	}
 
