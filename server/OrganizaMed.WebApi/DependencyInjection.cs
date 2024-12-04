@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using OrganizaMed.Aplicacao.ModuloAtividade;
 using OrganizaMed.Aplicacao.ModuloMedico;
 using OrganizaMed.Dominio.Compartilhado;
@@ -98,5 +99,40 @@ public static class DependencyInjection
 		logging.ClearProviders();
 
 		services.AddLogging(builder => builder.AddSerilog(dispose: true));
+	}
+
+	public static void ConfigureSwaggerAuthorization(this IServiceCollection services)
+	{
+		services.AddEndpointsApiExplorer();
+
+		services.AddSwaggerGen(c =>
+		{
+			c.SwaggerDoc("v1", new OpenApiInfo { Title = "OrganizaMed.Webapi", Version = "v1" });
+
+			c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+			{
+				In = ParameterLocation.Header,
+				Description = "Por favor informe o token no padrão {Bearer token}",
+				Name = "Authorization",
+				Type = SecuritySchemeType.ApiKey,
+				BearerFormat = "JWT",
+				Scheme = "Bearer"
+			});
+
+			c.AddSecurityRequirement(new OpenApiSecurityRequirement
+			{
+				{
+					new OpenApiSecurityScheme
+					{
+						Reference = new OpenApiReference
+						{
+							Type=ReferenceType.SecurityScheme,
+							Id="Bearer"
+						}
+					},
+					new string[]{}
+				}
+			});
+		});
 	}
 }

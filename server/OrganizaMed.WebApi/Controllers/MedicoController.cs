@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentResults;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrganizaMed.Aplicacao.ModuloMedico;
 using OrganizaMed.Dominio.ModuloMedico;
@@ -9,6 +10,7 @@ namespace OrganizaMed.WebApi.Controllers;
 
 [Route("api/medicos")]
 [ApiController]
+[Authorize]
 public class MedicoController(ServicoMedico servicoMedico, IMapper mapeador) : ControllerBase
 {
 	[HttpGet]
