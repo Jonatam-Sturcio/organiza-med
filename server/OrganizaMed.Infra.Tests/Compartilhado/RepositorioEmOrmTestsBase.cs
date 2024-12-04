@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using OrganizaMed.Dominio.Compartilhado;
+using OrganizaMed.Dominio.ModuloAutenticacao;
 using OrganizaMed.Dominio.ModuloMedico;
 using OrganizaMed.Infra.Orm.Compartilhado;
 using OrganizaMed.Infra.Orm.ModuloAtividades;
@@ -15,6 +16,7 @@ public abstract class RepositorioEmOrmTestsBase
 	protected OrganizaMedDbContext dbContext;
 	protected RepositorioMedicoOrm repositorioMedico;
 	protected RepositorioAtividadeOrm repositorioAtividade;
+	protected ITenantProvider tenantProvider;
 
 	[TestInitialize]
 	public void Inicializar()
@@ -25,7 +27,7 @@ public abstract class RepositorioEmOrmTestsBase
 			.UseSqlServer(config["SQLSERVER_CONNECTION_STRING"])
 			.Options;
 
-		dbContext = new OrganizaMedDbContext(options);
+		dbContext = new OrganizaMedDbContext(options, tenantProvider);
 
 		Debug.WriteLine("Criando banco de dados");
 		dbContext.Database.EnsureDeleted();

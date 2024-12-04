@@ -14,5 +14,6 @@ public class MapeadorMedicoOrm : IEntityTypeConfiguration<Medico>
 		builder.Property(x => x.Nome).HasColumnType("varchar(200)").IsRequired();
 		builder.Property(x => x.Especialidade).HasColumnType("varchar(200)").IsRequired();
 		builder.Property(x => x.CRM).HasColumnType("char(8)").IsRequired();
+		builder.HasOne(x => x.Usuario).WithMany().IsRequired().HasForeignKey(x => x.UsuarioId).OnDelete(DeleteBehavior.NoAction);
 	}
 }

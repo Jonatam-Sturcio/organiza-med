@@ -1,4 +1,5 @@
 using OrganizaMed.WebApi.Config;
+using OrganizaMed.WebApi.Identity;
 using Serilog;
 
 namespace OrganizaMed.WebApi;
@@ -18,6 +19,8 @@ public class Program
 		builder.Services.ConfigureAutoMapper();
 
 		builder.Services.ConfigureCors(politicaCors);
+
+		builder.Services.ConfigureIdentity();
 
 		builder.Services.ConfigureControllersWithFilters();
 

@@ -1,14 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OrganizaMed.Dominio.Compartilhado;
+using OrganizaMed.Dominio.ModuloAutenticacao;
+using OrganizaMed.Dominio.ModuloMedico;
 using OrganizaMed.Infra.Orm.ModuloAtividades;
 using OrganizaMed.Infra.Orm.ModuloMedico;
 
 namespace OrganizaMed.Infra.Orm.Compartilhado;
 
-public class OrganizaMedDbContext : DbContext, IContextoPersistencia
+public class OrganizaMedDbContext : IdentityDbContext<Usuario, Cargo, Guid>, IContextoPersistencia
 {
-	public OrganizaMedDbContext(DbContextOptions options) : base(options)
+	private readonly ITenantProvider tenantProvider;
+
+	public OrganizaMedDbContext(DbContextOptions options, ITenantProvider tenantProvider) : base(options)
 	{
+		this.tenantProvider = tenantProvider;
 	}
 
 	public async Task<bool> GravarAsync()
@@ -19,8 +25,13 @@ public class OrganizaMedDbContext : DbContext, IContextoPersistencia
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
+		var usuarioId = tenantProvider.UsuarioId;
+
 		modelBuilder.ApplyConfiguration(new MapeadorMedicoOrm());
+		modelBuilder.Entity<Medico>().HasQueryFilter(c => c.UsuarioId == usuarioId);
+
 		modelBuilder.ApplyConfiguration(new MapeadorAtividadeOrm());
+		modelBuilder.Entity<AtividadeBase>().HasQueryFilter(c => c.UsuarioId == usuarioId);
 		base.OnModelCreating(modelBuilder);
 	}
 }
