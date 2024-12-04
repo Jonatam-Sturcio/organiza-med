@@ -46,7 +46,7 @@ export class LoginComponent {
     private notificacaoService: NotificacaoService
   ) {
     this.form = this.fb.group({
-      login: [
+      userName: [
         '',
         [
           Validators.required,
@@ -54,7 +54,7 @@ export class LoginComponent {
           Validators.maxLength(30),
         ],
       ],
-      senha: [
+      password: [
         '',
         [
           Validators.required,
@@ -65,12 +65,12 @@ export class LoginComponent {
     });
   }
 
-  get login() {
-    return this.form.get('login');
+  get userName() {
+    return this.form.get('userName');
   }
 
-  get senha() {
-    return this.form.get('senha');
+  get password() {
+    return this.form.get('password');
   }
 
   public entrar() {
@@ -83,6 +83,8 @@ export class LoginComponent {
     }
 
     const loginUsuario: AutenticarUsuarioViewModel = this.form.value;
+
+    console.log(loginUsuario);
 
     const observer = {
       next: (res: TokenViewModel) => this.processarSucesso(res),

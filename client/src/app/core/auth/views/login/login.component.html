@@ -10,21 +10,21 @@
           <mat-label>Nome de Usuário</mat-label>
           <input
             matInput
-            data-cy="login"
-            formControlName="login"
+            data-cy="userName"
+            formControlName="userName"
             autocomplete="username"
             placeholder="Ex: JoaoSilva12"
             [maxlength]="30"
           />
           <mat-icon matSuffix color="primary">login</mat-icon>
-          <mat-error class="text-white" *ngIf="login?.invalid">
-            <span *ngIf="login?.errors?.['required']"
+          <mat-error class="text-white" *ngIf="userName?.invalid">
+            <span *ngIf="userName?.errors?.['required']"
               >O login precisa ser preenchido.</span
             >
-            <span *ngIf="login?.errors?.['minlength']"
+            <span *ngIf="userName?.errors?.['minlength']"
               >O login deve conter ao menos 3 caracteres.</span
             >
-            <span *ngIf="login?.errors?.['maxlength']"
+            <span *ngIf="userName?.errors?.['maxlength']"
               >O login deve conter no máximo 30 caracteres.</span
             >
           </mat-error>
@@ -34,22 +34,22 @@
           <mat-label>Senha</mat-label>
           <input
             matInput
-            data-cy="senha"
-            formControlName="senha"
+            data-cy="password"
+            formControlName="password"
             type="password"
             autocomplete="current-password"
             placeholder="A senha precisa conter ao menos 6 caracteres"
             [maxlength]="30"
           />
           <mat-icon matSuffix color="primary">password</mat-icon>
-          <mat-error class="text-white" *ngIf="senha?.invalid">
-            <span *ngIf="senha?.errors?.['required']"
+          <mat-error class="text-white" *ngIf="password?.invalid">
+            <span *ngIf="password?.errors?.['required']"
               >A senha precisa ser preenchida.</span
             >
-            <span *ngIf="senha?.errors?.['minlength']"
+            <span *ngIf="password?.errors?.['minlength']"
               >A senha deve conter ao menos 6 caracteres.</span
             >
-            <span *ngIf="senha?.errors?.['maxlength']"
+            <span *ngIf="password?.errors?.['maxlength']"
               >A senha deve conter no máximo 30 caracteres.</span
             >
           </mat-error>

@@ -61,8 +61,6 @@ export class RegistroComponent {
 
     const registro: RegistrarUsuarioViewModel = this.form.value;
 
-    console.log(registro);
-
     this.authService.registrar(registro).subscribe((res) => {
       this.usuarioService.logarUsuario(res.usuario);
 
