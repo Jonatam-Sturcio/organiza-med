@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using OrganizaMed.Aplicacao.ModuloAutenticacao;
 using OrganizaMed.Dominio.ModuloAutenticacao;
 using OrganizaMed.Infra.Orm.Compartilhado;
 
@@ -8,6 +9,8 @@ public static class IdentityDependencyInjection
 {
 	public static void ConfigureIdentity(this IServiceCollection services)
 	{
+		services.AddScoped<ServicoAutenticacao>();
+
 		services.AddScoped<ITenantProvider, ApiTenantProvider>();
 
 		services.AddIdentity<Usuario, Cargo>(options =>
