@@ -12,14 +12,14 @@ public class ApiTenantProvider : ITenantProvider
 		ContextAccessor = contextAccessor;
 	}
 
-	public Guid? UsuarioId
+	public Guid UsuarioId
 	{
 		get
 		{
 			var claimId = ContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
 
 			if (claimId == null)
-				return null;
+				return Guid.Empty;
 
 			return Guid.Parse(claimId.Value);
 		}

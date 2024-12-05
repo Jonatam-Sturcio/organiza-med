@@ -10,11 +10,12 @@ namespace OrganizaMed.Infra.Orm.Compartilhado;
 
 public class OrganizaMedDbContext : IdentityDbContext<Usuario, Cargo, Guid>, IContextoPersistencia
 {
-	private readonly ITenantProvider tenantProvider;
+	private Guid usuarioId;
 
 	public OrganizaMedDbContext(DbContextOptions options, ITenantProvider tenantProvider) : base(options)
 	{
-		this.tenantProvider = tenantProvider;
+		if (tenantProvider != null)
+			usuarioId = tenantProvider.UsuarioId;
 	}
 
 	public async Task<bool> GravarAsync()
@@ -25,8 +26,6 @@ public class OrganizaMedDbContext : IdentityDbContext<Usuario, Cargo, Guid>, ICo
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		var usuarioId = tenantProvider.UsuarioId;
-
 		modelBuilder.ApplyConfiguration(new MapeadorMedicoOrm());
 		modelBuilder.Entity<Medico>().HasQueryFilter(c => c.UsuarioId == usuarioId);
 
