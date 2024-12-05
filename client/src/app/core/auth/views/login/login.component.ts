@@ -84,8 +84,6 @@ export class LoginComponent {
 
     const loginUsuario: AutenticarUsuarioViewModel = this.form.value;
 
-    console.log(loginUsuario);
-
     const observer = {
       next: (res: TokenViewModel) => this.processarSucesso(res),
       error: (erro: Error) => this.processarFalha(erro),
