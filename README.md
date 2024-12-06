@@ -119,6 +119,8 @@ Para funcionar corretamente é necessário adicionar o seguinte no "segredos de 
 ```
 "SQLSERVER_CONNECTION_STRING": "Data Source=(LOCALDB)\\MSSQLLOCALDB;Initial Catalog=OrganizaMed;Integrated Security=True",
 "SERILOG_LICENSE_KEY": "c21f8a34dae133e4a001553b9a845e68FFFFNRAL"
+  "JWT_GENERATION_KEY": "aE0GB8a7sf568M45G7JL63K75498a67fg9a95G9SD54HB",
+    "JWT_AUDIENCE_DOMAIN":  "https://localhost"
 ```
 
 **_OrganizaMed.Infra.Tests_**
